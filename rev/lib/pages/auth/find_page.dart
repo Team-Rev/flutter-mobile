@@ -35,7 +35,6 @@ class _FindPageState extends State<FindPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-
                 SizedBox(
                   height: 100,
                   child: Image.asset('assets/512.png'),
@@ -64,34 +63,46 @@ class _FindPageState extends State<FindPage> {
                               Text(
                                 'Find ID',
                                 style: TextStyle(
-                                  color: whatToFind ? Colors.black45 : Colors.black87,
+                                  color: whatToFind
+                                      ? Colors.black45
+                                      : Colors.black87,
                                   fontSize: 18,
-                                  fontWeight:
-                                  whatToFind ? FontWeight.w400 : FontWeight.w600,
+                                  fontWeight: whatToFind
+                                      ? FontWeight.w400
+                                      : FontWeight.w600,
                                 ),
                               ),
                               Colors.transparent,
-                              Colors.white, onPressed: () {
-                              setState(() {
-                                whatToFind = true;
-                              });
-                            },padding: EdgeInsets.all(16.0),),
+                              Colors.white,
+                              onPressed: () {
+                                setState(() {
+                                  whatToFind = true;
+                                });
+                              },
+                              padding: EdgeInsets.all(16.0),
+                            ),
                             buildTextButton(
                               Text(
                                 'Find PW',
                                 style: TextStyle(
-                                  color: whatToFind ? Colors.black87 : Colors.black45,
+                                  color: whatToFind
+                                      ? Colors.black87
+                                      : Colors.black45,
                                   fontSize: 18,
-                                  fontWeight:
-                                  whatToFind ? FontWeight.w600 : FontWeight.w400,
+                                  fontWeight: whatToFind
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
                                 ),
                               ),
                               Colors.transparent,
-                              Colors.white, onPressed: () {
-                              setState(() {
-                                whatToFind = false;
-                              });
-                            },padding: EdgeInsets.all(16.0),),
+                              Colors.white,
+                              onPressed: () {
+                                setState(() {
+                                  whatToFind = false;
+                                });
+                              },
+                              padding: EdgeInsets.all(16.0),
+                            ),
                           ],
                         ),
                         buildTextFormField(
@@ -107,10 +118,24 @@ class _FindPageState extends State<FindPage> {
                         SizedBox(
                           height: 16.0,
                         ),
-                        Container(
-                          child: buildTextButton(
-                              Text("Sign In"), g3, Colors.white),
-                          width: MediaQuery.of(context).size.width,
+                        ButtonBar(
+                          alignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: buildTextButton(
+                                  whatToFind
+                                      ? Text("Find ID")
+                                      : Text("Find PW"),
+                                  g3,
+                                  Colors.white),
+                              width: MediaQuery.of(context).size.width * 0.3,
+                            ),
+                            Container(
+                              child: buildTextButton(
+                                  Text("Back to Menu"), g3, Colors.white),
+                              width: MediaQuery.of(context).size.width * 0.3,
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 16.0,
@@ -128,11 +153,13 @@ class _FindPageState extends State<FindPage> {
         ));
   }
 
-  TextButton buildTextButton(Text, Color color, Color fontColor, {onPressed, padding}) {
+  TextButton buildTextButton(Text, Color color, Color fontColor,
+      {onPressed, padding}) {
     return TextButton(
       onPressed: onPressed,
       child: Text,
-      style: TextButton.styleFrom(primary: fontColor, backgroundColor: color,padding: padding),
+      style: TextButton.styleFrom(
+          primary: fontColor, backgroundColor: color, padding: padding),
     );
   }
 
