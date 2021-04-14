@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rev/pages/auth/find_page.dart';
+import 'package:rev/pages/auth/login_page.dart';
+import 'package:rev/pages/auth/register_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
       // theme: ThemeData(
       //   primarySwatch: Colors.green,
       // ),
-      home: FindPage(),
+      home: LoginPage(),
     );
 
   }

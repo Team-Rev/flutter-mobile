@@ -2,6 +2,7 @@
     package="com.example.rev">
    <application
         android:label="rev"
+       android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

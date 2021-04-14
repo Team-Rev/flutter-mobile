@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rev/dio_server.dart';
 
 class LoginPage extends StatelessWidget {
   GlobalKey<FormState> _formKey=GlobalKey<FormState>();
@@ -68,6 +69,7 @@ class LoginPage extends StatelessWidget {
         if(_formKey.currentState.validate()) {
           print(_idController.text);
           print(_pwController.text);
+          server.postReq(username: _idController.text,password: _pwController.text);
         }
       },
       child: Text(text),
@@ -92,16 +94,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-// decoration: InputDecoration(
-// errorBorder: _border.copyWith(
-// borderSide: BorderSide(color: Colors.black, width: 3)),
-// errorStyle:
-// TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-// filled: true,
-// fillColor: Colors.black45,
-// hintText: labelText,
-// border: _border,
-// enabledBorder: _border,
-// focusedBorder: _border,
-// hintStyle: TextStyle(color: Colors.white)),
-// );
