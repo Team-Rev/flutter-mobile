@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../color_rev.dart';
+
 class FindPage extends StatefulWidget {
   @override
   _FindPageState createState() => _FindPageState();
@@ -13,12 +15,6 @@ class _FindPageState extends State<FindPage> {
 
   TextEditingController _pwController = TextEditingController();
 
-  Color g1 = Color.fromRGBO(102, 239, 156, 1.0);
-
-  Color g2 = Color.fromRGBO(157, 255, 205, 1.0);
-
-  Color g3 = Color.fromRGBO(37, 188, 109, 1.0);
-
   bool whatToFind = true;
 
   @override
@@ -26,7 +22,7 @@ class _FindPageState extends State<FindPage> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         //배경색
-        backgroundColor: g2,
+        backgroundColor: ColorRev.g2,
         body: Padding(
           padding: EdgeInsets.all(16.0),
           child: Form(
@@ -46,7 +42,7 @@ class _FindPageState extends State<FindPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32)),
                   //카드 색
-                  color: g1,
+                  color: ColorRev.white,
                   elevation: 7,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -73,7 +69,7 @@ class _FindPageState extends State<FindPage> {
                                 ),
                               ),
                               Colors.transparent,
-                              Colors.white,
+                              ColorRev.white,
                               onPressed: () {
                                 setState(() {
                                   whatToFind = true;
@@ -95,7 +91,7 @@ class _FindPageState extends State<FindPage> {
                                 ),
                               ),
                               Colors.transparent,
-                              Colors.white,
+                              ColorRev.white,
                               onPressed: () {
                                 setState(() {
                                   whatToFind = false;
@@ -126,13 +122,13 @@ class _FindPageState extends State<FindPage> {
                                   whatToFind
                                       ? Text("Find ID")
                                       : Text("Find PW"),
-                                  g3,
-                                  Colors.white),
+                                  ColorRev.g3,
+                                  ColorRev.white),
                               width: MediaQuery.of(context).size.width * 0.3,
                             ),
                             Container(
                               child: buildTextButton(
-                                  Text("Back to Menu"), g3, Colors.white),
+                                  Text("Back to Menu"), ColorRev.g3, Colors.white),
                               width: MediaQuery.of(context).size.width * 0.3,
                             ),
                           ],
@@ -170,7 +166,7 @@ class _FindPageState extends State<FindPage> {
       decoration: InputDecoration(
         icon: icon,
         labelText: labelText,
-        errorStyle: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        errorStyle: TextStyle(color: ColorRev.red, fontWeight: FontWeight.bold),
       ),
       validator: (text) {
         if (text == null || text.isEmpty) return 'Please input correctly';

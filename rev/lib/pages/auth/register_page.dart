@@ -1,20 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../color_rev.dart';
+
 class RegisterPage extends StatelessWidget {
   GlobalKey<FormState> _formKey=GlobalKey<FormState>();
   TextEditingController _idController = TextEditingController();
   TextEditingController _pwController = TextEditingController();
-  Color g1=Color.fromRGBO(102,239,156,1.0);
-  Color g2=Color.fromRGBO(157,255,205,1.0);
-  Color g3=Color.fromRGBO(37,188,109,1.0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       //배경색
-        backgroundColor: g2,
+        backgroundColor: ColorRev.g2,
         body: Padding(
           padding: EdgeInsets.all(16.0),
           child: Form(
@@ -30,7 +29,7 @@ class RegisterPage extends StatelessWidget {
                 Card(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                   //카드 색
-                  color: g1,
+                  color: ColorRev.white,
                   elevation: 7,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0,),
@@ -41,7 +40,7 @@ class RegisterPage extends StatelessWidget {
                         Row(children: [
                           Expanded(child: buildTextFormField(_idController, Icon(Icons.account_circle),'ID',),),
                           SizedBox(width: 16,),
-                          buildTextButton('Check', g3, Colors.white),
+                          buildTextButton('Check', ColorRev.g3, ColorRev.white),
                         ],),
                         buildTextFormField(_pwController, Icon(Icons.vpn_key), 'PW',),
                         buildTextFormField(_pwController, Icon(Icons.vpn_key_outlined), 'PW Check',),
@@ -55,8 +54,8 @@ class RegisterPage extends StatelessWidget {
                           alignment: MainAxisAlignment.center,
                           children: [
 
-                          Container(child: buildTextButton('Sign Up', g3, Colors.white),width: MediaQuery.of(context).size.width*0.3,),
-                          Container(child: buildTextButton('Back to Main', g3, Colors.white),width: MediaQuery.of(context).size.width*0.3,),
+                          Container(child: buildTextButton('Sign Up', ColorRev.g3, ColorRev.white),width: MediaQuery.of(context).size.width*0.3,),
+                          Container(child: buildTextButton('Back to Main', ColorRev.g3, ColorRev.white),width: MediaQuery.of(context).size.width*0.3,),
                         ],),
                         SizedBox(height: 16.0,),
                         // Container(child: buildTextButton("Forgot ID or Password?",Colors.transparent,Colors.grey),alignment:Alignment.centerRight),
@@ -91,7 +90,7 @@ class RegisterPage extends StatelessWidget {
       decoration: InputDecoration(
         icon: icon,
         labelText: labelText,
-        errorStyle: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),
+        errorStyle: TextStyle(color: ColorRev.red,fontWeight: FontWeight.bold),
 
       ),
       validator: (text) {
