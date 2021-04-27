@@ -32,12 +32,26 @@ class _FindPageState extends State<FindPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(
-            height: 100,
-            child: Image.asset('assets/512.png'),
-          ),
-          SizedBox(
-            height: 100,
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 120),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 120,
+                  child: Image.asset(
+                    'assets/512.png',
+                    color: ColorRev.white,
+                  ),
+                ),
+                Text(
+                  'One Pass',
+                  style: TextStyle(
+                      fontSize: 28,
+                      color: ColorRev.white,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           ),
           Card(
             shape: RoundedRectangleBorder(

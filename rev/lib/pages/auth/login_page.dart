@@ -25,9 +25,23 @@ class LoginPage extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 120),
-            child: SizedBox(
-              height: 120,
-              child: Image.asset('assets/512.png'),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 120,
+                  child: Image.asset(
+                    'assets/512.png',
+                    color: ColorRev.white,
+                  ),
+                ),
+                Text(
+                  'One Pass',
+                  style: TextStyle(
+                      fontSize: 28,
+                      color: ColorRev.white,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
             ),
           ),
           Card(

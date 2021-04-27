@@ -21,10 +21,24 @@ class RegisterPage extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 64, bottom: 32),
-            child: SizedBox(
-              height: 64,
-              child: Image.asset('assets/512.png'),
+            padding: EdgeInsets.symmetric(vertical: 32),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 60,
+                  child: Image.asset(
+                    'assets/512.png',
+                    color: ColorRev.white,
+                  ),
+                ),
+                Text(
+                  'One Pass',
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: ColorRev.white,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
             ),
           ),
           Card(

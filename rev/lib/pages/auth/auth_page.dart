@@ -24,7 +24,7 @@ class AuthWidget extends StatelessWidget {
     _authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: ColorRev.g1,
+      backgroundColor: ColorRev.g3,
       body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0), child: selectPage()),
     );
