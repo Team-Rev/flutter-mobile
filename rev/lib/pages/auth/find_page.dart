@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rev/provider/provider_auth.dart';
 
 import '../../color_rev.dart';
+import '../../reusable.dart';
 
 class FindPage extends StatefulWidget {
+  final pageName = 'FindPage';
+
   @override
   _FindPageState createState() => _FindPageState();
 }
@@ -14,164 +19,113 @@ class _FindPageState extends State<FindPage> {
   TextEditingController _idController = TextEditingController();
 
   TextEditingController _pwController = TextEditingController();
+  AuthProvider _authProvider;
 
   bool whatToFind = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        //배경색
-        backgroundColor: ColorRev.g2,
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  height: 100,
-                  child: Image.asset('assets/512.png'),
+    _authProvider=Provider.of<AuthProvider>(context);
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SizedBox(
+              height: 100,
+              child: Image.asset('assets/512.png'),
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32)),
+              //카드 색
+              color: ColorRev.white,
+              elevation: 7,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.0,
                 ),
-                SizedBox(
-                  height: 100,
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32)),
-                  //카드 색
-                  color: ColorRev.white,
-                  elevation: 7,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        ButtonBar(
-                          alignment: MainAxisAlignment.end,
-                          children: [
-                            buildTextButton(
-                              Text(
-                                'Find ID',
-                                style: TextStyle(
-                                  color: whatToFind
-                                      ? Colors.black45
-                                      : Colors.black87,
-                                  fontSize: 18,
-                                  fontWeight: whatToFind
-                                      ? FontWeight.w400
-                                      : FontWeight.w600,
-                                ),
-                              ),
-                              Colors.transparent,
-                              ColorRev.white,
-                              onPressed: () {
-                                setState(() {
-                                  whatToFind = true;
-                                });
-                              },
-                              padding: EdgeInsets.all(16.0),
-                            ),
-                            buildTextButton(
-                              Text(
-                                'Find PW',
-                                style: TextStyle(
-                                  color: whatToFind
-                                      ? Colors.black87
-                                      : Colors.black45,
-                                  fontSize: 18,
-                                  fontWeight: whatToFind
-                                      ? FontWeight.w600
-                                      : FontWeight.w400,
-                                ),
-                              ),
-                              Colors.transparent,
-                              ColorRev.white,
-                              onPressed: () {
-                                setState(() {
-                                  whatToFind = false;
-                                });
-                              },
-                              padding: EdgeInsets.all(16.0),
-                            ),
-                          ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    ButtonBar(
+                      alignment: MainAxisAlignment.end,
+                      children: [
+                        ReUsable.buildTextButton3(
+                          'Find ID',
+                          () {
+                            setState(() {
+                              whatToFind = true;
+                            });
+                          },
+                          style: TextStyle(
+                            color: whatToFind ? Colors.black45 : Colors.black87,
+                            fontSize: 18,
+                            fontWeight:
+                                whatToFind ? FontWeight.w400 : FontWeight.w600,
+                          ),
                         ),
-                        buildTextFormField(
-                          _idController,
-                          Icon(Icons.account_circle),
-                          'ID',
-                        ),
-                        buildTextFormField(
-                          _pwController,
-                          Icon(Icons.vpn_key),
-                          'PW',
-                        ),
-                        SizedBox(
-                          height: 16.0,
-                        ),
-                        ButtonBar(
-                          alignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: buildTextButton(
-                                  whatToFind
-                                      ? Text("Find ID")
-                                      : Text("Find PW"),
-                                  ColorRev.g3,
-                                  ColorRev.white),
-                              width: MediaQuery.of(context).size.width * 0.3,
-                            ),
-                            Container(
-                              child: buildTextButton(
-                                  Text("Back to Menu"), ColorRev.g3, Colors.white),
-                              width: MediaQuery.of(context).size.width * 0.3,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 16.0,
+                        ReUsable.buildTextButton3(
+                          'Find PW',
+                          () {
+                            setState(() {
+                              whatToFind = false;
+                            });
+                          },
+                          style: TextStyle(
+                            color: whatToFind ? Colors.black87 : Colors.black45,
+                            fontSize: 18,
+                            fontWeight:
+                                whatToFind ? FontWeight.w600 : FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    ReUsable.buildTextFormField(
+                      _idController,
+                      Icon(Icons.account_circle),
+                      'ID',
+                    ),
+                    ReUsable.buildTextFormField(
+                      _pwController,
+                      Icon(Icons.vpn_key),
+                      'PW',
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: ButtonBar(
+                        alignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: ReUsable.buildTextButton2(
+                                whatToFind ? "Find ID" : "Find PW", () {}),
+                            width: MediaQuery.of(context).size.width * 0.3,
+                          ),
+                          Container(
+                            child: ReUsable.buildTextButton2(
+                                "Back to Menu", () {_authProvider.updateStatePage('LoginPage');}),
+                            width: MediaQuery.of(context).size.width * 0.3,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 32,
-                ),
-              ],
+              ),
             ),
-          ),
-        ));
-  }
-
-  TextButton buildTextButton(Text, Color color, Color fontColor,
-      {onPressed, padding}) {
-    return TextButton(
-      onPressed: onPressed,
-      child: Text,
-      style: TextButton.styleFrom(
-          primary: fontColor, backgroundColor: color, padding: padding),
-    );
-  }
-
-  TextFormField buildTextFormField(
-      TextEditingController controller, Icon icon, String labelText) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        icon: icon,
-        labelText: labelText,
-        errorStyle: TextStyle(color: ColorRev.red, fontWeight: FontWeight.bold),
+            SizedBox(
+              height: 32,
+            ),
+          ],
+        ),
       ),
-      validator: (text) {
-        if (text == null || text.isEmpty) return 'Please input correctly';
-        return null;
-      },
     );
   }
 }

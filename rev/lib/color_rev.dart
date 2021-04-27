@@ -8,4 +8,6 @@ class ColorRev {
   static const Color white = Color.fromRGBO(255, 255, 255, 1.0);
   static const Color grey = Color.fromRGBO(200, 200, 200, 1.0);
   static const Color red = Colors.red;
+  static ButtonStyle buttonStyle1=TextButton.styleFrom(primary: white,backgroundColor: g3);
+  static ButtonStyle buttonStyle2=TextButton.styleFrom(primary: grey,backgroundColor: Colors.transparent);
 }
