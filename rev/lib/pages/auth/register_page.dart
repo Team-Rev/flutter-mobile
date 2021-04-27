@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rev/dio_server.dart';
 import 'package:rev/provider/provider_auth.dart';
 
 import '../../color_rev.dart';
@@ -11,6 +12,18 @@ class RegisterPage extends StatelessWidget {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _idController = TextEditingController();
   TextEditingController _pwController = TextEditingController();
+  TextEditingController _nickController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+
+  TextEditingController _DOBController = TextEditingController();
+
+  TextEditingController _phoneController = TextEditingController();
+
+  TextEditingController _addressController = TextEditingController();
+
+  TextEditingController _detailAddressController = TextEditingController();
+
+  TextEditingController _postNumberController = TextEditingController();
   AuthProvider _authProvider;
 
   @override
@@ -21,11 +34,11 @@ class RegisterPage extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 32),
+            padding: EdgeInsets.only(top: 32, bottom: 8),
             child: Column(
               children: [
                 SizedBox(
-                  height: 60,
+                  height: 64,
                   child: Image.asset(
                     'assets/512.png',
                     color: ColorRev.white,
@@ -34,7 +47,7 @@ class RegisterPage extends StatelessWidget {
                 Text(
                   'One Pass',
                   style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 12,
                       color: ColorRev.white,
                       fontWeight: FontWeight.bold),
                 )
@@ -48,7 +61,7 @@ class RegisterPage extends StatelessWidget {
             color: ColorRev.white,
             elevation: 7,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -74,39 +87,65 @@ class RegisterPage extends StatelessWidget {
                     'PW',
                   ),
                   ReUsable.buildTextFormField(
-                    _pwController,
+                    null,
                     Icon(Icons.vpn_key_outlined),
                     'PW Check',
                   ),
                   ReUsable.buildTextFormField(
-                    _pwController,
-                    Icon(Icons.person),
+                    _nickController,
+                    Icon(Icons.assignment_ind_outlined),
+                    'NickName',
+                  ),
+                  ReUsable.buildTextFormField(
+                    _nameController,
+                    Icon(Icons.assignment_ind),
                     'Name',
                   ),
                   ReUsable.buildTextFormField(
-                    _pwController,
-                    Icon(Icons.email),
-                    'Email',
+                    _DOBController,
+                    Icon(Icons.calendar_today),
+                    'Birth',
                   ),
                   ReUsable.buildTextFormField(
-                    _pwController,
+                    _phoneController,
                     Icon(Icons.call),
-                    'Contect',
+                    'Phone',
                   ),
                   ReUsable.buildTextFormField(
-                    _pwController,
+                    _addressController,
                     Icon(Icons.house),
                     'Address',
                   ),
-                  SizedBox(
-                    height: 16.0,
+                  ReUsable.buildTextFormField(
+                    _detailAddressController,
+                    Icon(Icons.house),
+                    'DetailAddress',
                   ),
+                  ReUsable.buildTextFormField(
+                    _postNumberController,
+                    Icon(Icons.house),
+                    'PostNumber',
+                  ),
+
                   // Container(child: buildTextButton("Sign Up",g3,Colors.white),width: MediaQuery.of(context).size.width,),
                   ButtonBar(
                     alignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: ReUsable.buildTextButton2('Sign Up', () {}),
+                        child: ReUsable.buildTextButton2('Sign Up', () {
+                          server.postReq(
+                            "SignUp",
+                            userId: _idController.text.toString(),
+                            password: _pwController.text.toString(),
+                            nickname: _nickController.text.toString(),
+                            name: _nameController.text.toString(),
+                            DOB: _DOBController.text.toString(),
+                            phone: _phoneController.text.toString(),
+                            address: _addressController.text.toString(),
+                            detailAddress: _detailAddressController.text.toString(),
+                            postNumber: _postNumberController.text.toString()
+                          );
+                        }),
                         width: MediaQuery.of(context).size.width * 0.3,
                       ),
                       Container(
@@ -116,9 +155,6 @@ class RegisterPage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.3,
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: 16.0,
                   ),
                   // Container(child: buildTextButton("Forgot ID or Password?",Colors.transparent,Colors.grey),alignment:Alignment.centerRight),
                 ],
