@@ -15,7 +15,10 @@ class ReUsable {
   static TextButton buildTextButton3(String text, onPressed, {style}) {
     return TextButton(
       onPressed: onPressed,
-      child: Text(text, style: style,),
+      child: Text(
+        text,
+        style: style,
+      ),
       style: ColorRev.buttonStyle2,
     );
   }
@@ -30,9 +33,8 @@ class ReUsable {
     );
   }
 
-
-  static TextFormField buildTextFormField(TextEditingController controller,
-      Icon icon, String labelText) {
+  static TextFormField buildTextFormField(
+      TextEditingController controller, Icon icon, String labelText) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(

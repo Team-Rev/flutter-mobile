@@ -16,7 +16,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _authProvider = Provider.of<AuthProvider>(context);
+    _authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Form(
       key: _formKey,
       child: Column(
@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
                       if (_formKey.currentState.validate()) {
                         print(_idController.text);
                         print(_pwController.text);
-                        server.postReq(
+                        server.postReq('SignIn',
                             username: _idController.text,
                             password: _pwController.text);
                       }

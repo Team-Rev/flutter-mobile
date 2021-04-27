@@ -8,7 +8,6 @@ import 'package:rev/provider/provider_auth.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -24,15 +23,15 @@ class MyApp extends StatelessWidget {
           builder: (context, provider, child) {
             return Navigator(
               onPopPage: (route, result) {
-                if(!route.didPop(result)) return false;
+                if (!route.didPop(result)) return false;
                 return true;
               },
               pages: [
                 AuthPage(),
-                if(provider.currentPage=='1')
+                if (provider.currentPage == '1')
                   MaterialPage(
-                    key:ValueKey(LoginPage().pageName), // 세션ID?
-                    child:MainPage(),
+                    key: ValueKey(LoginPage().pageName), // 세션ID?
+                    child: MainPage(),
                   )
               ],
             );
