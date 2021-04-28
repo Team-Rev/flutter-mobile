@@ -51,24 +51,25 @@ class Server {
       case 'FindPw':
       case 'CheckIdValidate':
     }
-    data = {
-      "userId": "test@naver.com",
-      "password": "asdf123123",
-      "nickname": "상민",
-      "name": "이상민",
-      "DOB": "1998-11-20",
-      "phone": "01034087477",
-      "address": "대구광역시 북구 칠곡중앙대로",
-      "detailAddress": "전원맨션",
-      "postNumber": "41527"
-    };
+
     //DoPostRequest
-    // response = await dio.post("{$_API_Auth}{$addr}", data: data);
     print('${Secret.path}$addr');
-    response = await dio.post('{$Secret().path}{$addr}', data: data);
+    response = await dio.post('${Secret.path}$addr', data: data);
     print("result" + response.data.toString());
-    if (response.data.toString() == null) return 1;
-    return 0;
+    if (response.data.toString() == null) return false;
+    switch(type) {
+      case 'SignIn':
+      //TODO Success, Fail 판별해서 팝업 띄우기 추가
+        Secret.setToken(response.data['jwt']);
+        break;
+      case 'SignUp':
+        //TODO Success, Fail 판별해서 팝업 띄우기 추가
+        break;
+      case 'FindId':
+      case 'FindPw':
+      case 'CheckIdValidate':
+    }
+    return true;
   }
 
 // //getRequestWithQuery
