@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rev/color_rev.dart';
-import 'package:rev/pages/auth/register_page.dart';
+import 'package:rev/pages/auth/auth_register.dart';
 import 'package:rev/provider/provider_auth.dart';
 
-import 'find_page.dart';
-import 'login_page.dart';
+import 'auth_find.dart';
+import 'auth_login.dart';
 
 class AuthPage extends Page {
   @override
@@ -32,11 +32,11 @@ class AuthWidget extends StatelessWidget {
 
   Widget selectPage() {
     switch (_authProvider.currentPage) {
-      case 'FindPage':
-        return FindPage();
-      case 'RegisterPage':
-        return RegisterPage();
+      case 'AuthFind':
+        return AuthFind();
+      case 'AuthRegister':
+        return AuthRegister();
     }
-    return LoginPage();
+    return AuthLogin();
   }
 }

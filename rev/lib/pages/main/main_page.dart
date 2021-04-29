@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rev/color_rev.dart';
+import 'package:rev/pages/main/main_default.dart';
+import 'package:rev/pages/main/main_profile.dart';
+import 'package:rev/pages/main/main_test.dart';
 import 'package:rev/provider/provider_main.dart';
+
 
 class MainPage extends Page {
   @override
@@ -29,11 +33,11 @@ class MainWidget extends StatelessWidget {
   Widget _navigationBody() {
     switch(_mainProvider.currentPage) {
       case 0:
-        return Center(child: Text('프로필'),);
+        return MainProfile();
       case 1:
-        return Center(child: Text('메인'),);
+        return MainDefault();
       case 2:
-        return Center(child: Text('공부하기'),);
+        return MainTest();
     }
     return Container();
   }

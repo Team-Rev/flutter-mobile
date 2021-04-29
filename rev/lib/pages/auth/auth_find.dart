@@ -6,14 +6,14 @@ import 'package:rev/provider/provider_auth.dart';
 import '../../color_rev.dart';
 import '../../reusable.dart';
 
-class FindPage extends StatefulWidget {
-  final pageName = 'FindPage';
+class AuthFind extends StatefulWidget {
+  final pageName = 'AuthFind';
 
   @override
-  _FindPageState createState() => _FindPageState();
+  _AuthFindState createState() => _AuthFindState();
 }
 
-class _FindPageState extends State<FindPage> {
+class _AuthFindState extends State<AuthFind> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController _idController = TextEditingController();
@@ -123,7 +123,7 @@ class _FindPageState extends State<FindPage> {
                         Container(
                           child:
                               ReUsable.buildTextButton2("Back to Menu", () {
-                            _authProvider.updateStatePage('LoginPage');
+                            _authProvider.updateStatePage('AuthLogin');
                           }),
                           width: MediaQuery.of(context).size.width * 0.3,
                         ),

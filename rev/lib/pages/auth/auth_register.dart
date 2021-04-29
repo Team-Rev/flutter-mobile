@@ -7,8 +7,8 @@ import 'package:rev/provider/provider_auth.dart';
 import '../../color_rev.dart';
 import '../../reusable.dart';
 
-class RegisterPage extends StatelessWidget {
-  final pageName = 'RegisterPage';
+class AuthRegister extends StatelessWidget {
+  final pageName = 'AuthRegister';
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _idController = TextEditingController();
   TextEditingController _pwController = TextEditingController();
@@ -150,7 +150,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       Container(
                         child: ReUsable.buildTextButton2('Back to Main', () {
-                          _authProvider.updateStatePage('LoginPage');
+                          _authProvider.updateStatePage('AuthLogin');
                         }),
                         width: MediaQuery.of(context).size.width * 0.3,
                       ),

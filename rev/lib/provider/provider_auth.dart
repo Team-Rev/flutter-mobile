@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:rev/pages/auth/login_page.dart';
+import 'package:rev/pages/auth/auth_login.dart';
 
 class AuthProvider extends ChangeNotifier {
-  String _currentPage = LoginPage().pageName;
+  String _currentPage = AuthLogin().pageName;
 
   String get currentPage => _currentPage;
 

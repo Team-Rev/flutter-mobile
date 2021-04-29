@@ -7,8 +7,8 @@ import 'package:rev/provider/provider_auth.dart';
 import '../../color_rev.dart';
 import '../../reusable.dart';
 
-class LoginPage extends StatelessWidget {
-  final pageName = 'LoginPage';
+class AuthLogin extends StatelessWidget {
+  final pageName = 'AuthLogin';
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _idController = TextEditingController();
   TextEditingController _pwController = TextEditingController();
@@ -86,9 +86,9 @@ class LoginPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                   ),
                   Container(
-                      child: ReUsable.buildTextButton3("Forget Id or Password?",
+                      child: ReUsable.buildTextButton4("Forget Id or Password?",
                           () {
-                        _authProvider.updateStatePage('FindPage');
+                        _authProvider.updateStatePage('AuthFind');
                       }),
                       alignment: Alignment.centerRight),
                 ],
@@ -98,7 +98,7 @@ class LoginPage extends StatelessWidget {
           Padding(
               padding: EdgeInsets.only(top: 32),
               child: ReUsable.buildTextButton3("Create your New Account", () {
-                _authProvider.updateStatePage('RegisterPage');
+                _authProvider.updateStatePage('AuthRegister');
               })),
         ],
       ),

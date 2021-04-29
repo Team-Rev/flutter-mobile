@@ -22,6 +22,16 @@ class ReUsable {
       style: ColorRev.buttonStyle2,
     );
   }
+  static TextButton buildTextButton4(String text, onPressed, {style}) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: style,
+      ),
+      style: ColorRev.buttonStyle3,
+    );
+  }
 
   TextButton buildTextButton(Text, Color color, Color fontColor,
       {onPressed, padding}) {
