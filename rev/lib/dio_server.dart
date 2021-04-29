@@ -15,17 +15,17 @@ class Server {
   }
 
   //DoPost
-  Future<dynamic> postReq(String type,
+  Future<dynamic> postReq(function, String type,
       {username,
-      password,
-      userId,
-      nickname,
-      name,
-      DOB,
-      phone,
-      address,
-      detailAddress,
-      postNumber}) async {
+        password,
+        userId,
+        nickname,
+        name,
+        DOB,
+        phone,
+        address,
+        detailAddress,
+        postNumber}) async {
     Response response;
     Map<String, dynamic> data;
     Dio dio = Dio();
@@ -61,9 +61,10 @@ class Server {
       case 'SignIn':
       //TODO Success, Fail 판별해서 팝업 띄우기 추가
         Secret.setToken(response.data['jwt']);
+        function.goToMain();
         break;
       case 'SignUp':
-        //TODO Success, Fail 판별해서 팝업 띄우기 추가
+      //TODO Success, Fail 판별해서 팝업 띄우기 추가
         break;
       case 'FindId':
       case 'FindPw':
