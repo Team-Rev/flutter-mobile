@@ -8,9 +8,13 @@ class Server {
   Future<void> getReq() async {
     //Response : Dio에서 가져와서 사용. Data 반환
     Response response;
-    Dio dio = Dio();
+    var options=BaseOptions(headers: {
+      'Authorization':'Bearer ${Secret.token}'
+    });
+    Dio dio = Dio(options);
     //DogetRequest
-    // response = await dio.get("$_API_PREFIX/1");
+    response = await dio.get("${Secret.path}/problem/rangeQuestions?start=:1&end=:10",);
+
     print(response.data.toString());
   }
 

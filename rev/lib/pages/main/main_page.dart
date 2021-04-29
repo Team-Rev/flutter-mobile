@@ -26,7 +26,10 @@ class MainWidget extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ColorRev.g3,
-      body: _navigationBody(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: _navigationBody(),
+      ),
       bottomNavigationBar: _bottomNavigationBarWidget(),
     );
   }
