@@ -13,7 +13,7 @@ class Server {
     });
     Dio dio = Dio(options);
     //DogetRequest
-    response = await dio.get("${Secret.path}/problem/rangeQuestions?start=:1&end=:10",);
+    response = await dio.get("${Secret.path}problem/rangeQuestions?start=1&end=10",);
 
     print(response.data.toString());
   }
