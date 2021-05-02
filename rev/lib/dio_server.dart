@@ -51,9 +51,6 @@ class Server {
           "detailAddress": detailAddress,
           "postNumber": postNumber};
         break;
-      case 'FindId':
-      case 'FindPw':
-      case 'CheckIdValidate':
     }
 
     //DoPostRequest
@@ -77,16 +74,28 @@ class Server {
     return true;
   }
 
-// //getRequestWithQuery
-// Future<void> getReqWzQueery() async {
-//   Response response;
-//   Dio dio = Dio();
-//   // response = await dio.get(_API_PREFIX, queryParameters: {
-//   //   "id": 1, //id
-//   //   "pw": 2, //pw
-//   // });
-//   print(response.data.toString());
-// }
+//getRequestWithQuery
+Future<void> getReqToQueery(function, String type,{String start, String end,}) async {
+  Response response;
+  var options=BaseOptions(headers: {
+    'Authorization':'Bearer ${Secret.token}'
+  });
+  Dio dio = Dio(options);
+  Map<String,dynamic> queryParameters;
+  String addr;
+  switch (type) {
+    case 'getQuestionByRange':
+      addr='problem/rangeQuestions';
+      queryParameters={
+        'start':start,
+        'end':end,
+      };
+      break;
+  }
+  response = await dio.get('${Secret.path}$addr', queryParameters: queryParameters);
+  var question=response.data;
+  print(response.data.toString());
+}
 }
 
 Server server = Server();

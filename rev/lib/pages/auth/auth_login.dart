@@ -71,14 +71,14 @@ class AuthLogin extends StatelessWidget {
                   ),
                   Container(
                     child: ReUsable.buildTextButton2("Sign In", () {
-                      if (_formKey.currentState.validate()) {
-                        print(_idController.text);
-                        print(_pwController.text);
-                        dynamic result=server.postReq(_authProvider,'SignIn',
-                            username: _idController.text,
-                            password: _pwController.text);
-                      }
-                      // _authProvider.goToMain();
+                      // if (_formKey.currentState.validate()) {
+                      //   print(_idController.text);
+                      //   print(_pwController.text);
+                      //   dynamic result=server.postReq(_authProvider,'SignIn',
+                      //       username: _idController.text,
+                      //       password: _pwController.text);
+                      // }
+                      _authProvider.goToMain();
                     }
                     ),
                     width: MediaQuery.of(context).size.width,
