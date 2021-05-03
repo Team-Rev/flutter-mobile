@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rev/pages/auth/auth_page.dart';
 import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/pages/main/main_test/trash.dart';
+import 'package:rev/provider/provider_answer.dart';
 import 'package:rev/provider/provider_auth.dart';
 import 'package:rev/provider/provider_main.dart';
 import 'package:rev/provider/provider_test.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => MainProvider()),
         ChangeNotifierProvider(create: (_) => QuestionProvider()),
+        ChangeNotifierProvider(create: (_) => AnswerProvider()),
       ],
       child: MaterialApp(
         // title: 'Flutter Demo',

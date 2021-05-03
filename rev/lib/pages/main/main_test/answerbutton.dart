@@ -1,38 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rev/provider/provider_answer.dart';
+import 'package:rev/provider/questions.dart';
 
 import '../../../color_rev.dart';
 
 class AnswerButton extends StatefulWidget {
   String name;
-  AnswerButton(String name) {
+  int currentQuestion=0;
+  AnswerButton(String name, int currentQuestion) {
     this.name=name;
+    currentQuestion=currentQuestion;
   }
   @override
-  _AnswerButtonState createState() => _AnswerButtonState();
+  _AnswerButtonState createState() => _AnswerButtonState(name, currentQuestion);
 }
 
 class _AnswerButtonState extends State<AnswerButton> {
+  AnswerProvider _answerProvider;
+  int currentQuestion=0;
   bool _isChecked=false;
+  String name;
+  List<int> temp;
+  _AnswerButtonState(String name, int currentQuestion) {
+    this.name=name;
+    currentQuestion=currentQuestion;
+  }
   @override
   Widget build(BuildContext context) {
+    _answerProvider=Provider.of<AnswerProvider>(context);
+    temp=Questions.submitList[currentQuestion];
+    _isChecked=check();
+    print(temp);
+    print(Questions.answerList[currentQuestion]);
     return TextButton(
-        onPressed: () {
+        onPressed: (){
         setState(() {
           toggle();
         });
       },
-      child: Text(widget.name),
+      child: Text(name),
       style: TextButton.styleFrom(
         alignment: Alignment.centerLeft,
           primary: _isChecked ? ColorRev.g3 : Colors.black,
           backgroundColor: Colors.transparent),
     );
   }
+  bool check() {
+    for(int i=0;i<temp.length;i++)
+    if(temp[i]!=0&&temp[i]==Questions.answerList[currentQuestion][name])
+      return true;
+    return false;
+  }
   void toggle() {
-    if (_isChecked)
-      _isChecked = false;
-    else
+    if (_isChecked) {
+      if(check()) {
+        temp.remove(Questions.answerList[currentQuestion][name]);
+        _isChecked = false;
+      }
+      // Questions.submitList[currentQuestion].add(Questions.answerList[currentQuestion]["${widget.name}"]);
+    }
+    else {
+      temp.add(Questions.answerList[currentQuestion][name]);
       _isChecked = true;
+    }
+
   }
 }
 
