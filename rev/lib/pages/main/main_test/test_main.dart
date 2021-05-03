@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rev/pages/main/main_test/trash.dart';
 
 import '../../../dio_server.dart';
 import '../../../reusable.dart';
@@ -68,7 +67,7 @@ class MainTest extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
             child: ReUsable.buildTextButton4('문제 풀기', () {
-              // server.getReq();
+              server.getReq();
               Navigator.push(context, MaterialPageRoute(builder: (context) =>TestQuestion()));
 
             }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),

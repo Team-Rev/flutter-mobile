@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:rev/provider/questions.dart';
 import 'package:rev/secret.dart';
 
 //http형식으로 데이터 요청
@@ -75,7 +76,7 @@ class Server {
   }
 
 //getRequestWithQuery
-Future<void> getReqToQueery(function, String type,{String start, String end,}) async {
+Future<void> getReqToQueery(function, String type,{String start, String end,})  {
   Response response;
   var options=BaseOptions(headers: {
     'Authorization':'Bearer ${Secret.token}'
@@ -92,9 +93,10 @@ Future<void> getReqToQueery(function, String type,{String start, String end,}) a
       };
       break;
   }
-  response = await dio.get('${Secret.path}$addr', queryParameters: queryParameters);
-  var question=response.data;
-  print(response.data.toString());
+  // response = await dio.get('${Secret.path}$addr', queryParameters: queryParameters);
+  // var question=response.data;
+  Questions.init(Questions.question);
+  // print(response.data.toString());
 }
 }
 

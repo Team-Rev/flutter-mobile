@@ -11,9 +11,13 @@ class Questions {
   static void init(List<Map<String,dynamic>> value) {
     _questionList.clear();
     _answerList.clear();
-    _submitList=List.filled(questionLength,[]);
+    if(_submitList.length==0)
+      for(int i=0;i<value.length;i++) {
+        _submitList.add([]);
+      }
     for (int i = 0; i < value.length; i++) {
       _questionList.add(value[i]["exam"]);
+
       Map<String, int> answer = {};
       for (int j = 0; j < value[i]["choices"].length; j++) {
         answer.addAll(
@@ -21,6 +25,7 @@ class Questions {
       }
       _answerList.add(answer);
     }
+    print("submitValue : $_submitList");
   }
   static get questionLength => _question.length;
   static get question => _question;
