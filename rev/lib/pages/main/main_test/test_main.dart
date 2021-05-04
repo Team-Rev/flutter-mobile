@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rev/provider/provider_test.dart';
 
 import '../../../dio_server.dart';
 import '../../../reusable.dart';
-import 'Test_Question.dart';
 
 
 class TestPage extends Page {
@@ -66,11 +67,16 @@ class MainTest extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
-            child: ReUsable.buildTextButton4('문제 풀기', () {
-              server.getReq();
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>TestQuestion()));
+            child: Consumer<QuestionProvider>(
+              builder: (context,provider,child) {
+                return ReUsable.buildTextButton4('문제 풀기', () {
+                  provider.updateCurrentQuestion(0);
+                  server.getReqToQuery(context,'getQuestionByRange',start: 1,end: 5);
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) =>TestQuestion()));
 
-            }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold));
+              },
+            ),
           ),
         ),
         Container(

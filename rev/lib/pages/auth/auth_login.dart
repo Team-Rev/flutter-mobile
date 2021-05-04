@@ -10,8 +10,8 @@ import '../../reusable.dart';
 class AuthLogin extends StatelessWidget {
   final pageName = 'AuthLogin';
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _idController = TextEditingController();
-  TextEditingController _pwController = TextEditingController();
+  TextEditingController _idController = TextEditingController(text: "test@naver.com");
+  TextEditingController _pwController = TextEditingController(text: "asdf123123");
   AuthProvider _authProvider;
 
   @override
@@ -71,14 +71,14 @@ class AuthLogin extends StatelessWidget {
                   ),
                   Container(
                     child: ReUsable.buildTextButton2("Sign In", () {
-                      // if (_formKey.currentState.validate()) {
-                      //   print(_idController.text);
-                      //   print(_pwController.text);
-                      //   dynamic result=server.postReq(_authProvider,'SignIn',
-                      //       username: _idController.text,
-                      //       password: _pwController.text);
-                      // }
-                      _authProvider.goToMain();
+                      if (_formKey.currentState.validate()) {
+                        print(_idController.text);
+                        print(_pwController.text);
+                        server.postReq(context,_authProvider,'SignIn',
+                            username: _idController.text,
+                            password: _pwController.text);
+                      }
+                      // _authProvider.goToMain();
                     }
                     ),
                     width: MediaQuery.of(context).size.width,
