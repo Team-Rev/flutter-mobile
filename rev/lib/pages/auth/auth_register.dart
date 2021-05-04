@@ -133,8 +133,8 @@ class AuthRegister extends StatelessWidget {
                     children: [
                       Container(
                         child: ReUsable.buildTextButton2('Sign Up', () {
-                          server.postReq(context,_authProvider,
-                            "SignUp",
+                          server.doPost(context,
+                            "signup",
                             userId: _idController.text.toString(),
                             password: _pwController.text.toString(),
                             nickname: _nickController.text.toString(),

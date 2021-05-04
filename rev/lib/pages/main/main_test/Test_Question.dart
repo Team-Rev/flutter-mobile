@@ -142,7 +142,7 @@ class TestQuestion extends StatelessWidget {
                           ),
                         ),
                         ReUsable.buildTextButton2("제출", () {
-                          server.postReq(context, () {}, 'submit');
+                          server.doPost(context, 'submit');
                         })
                       ],
                     ),

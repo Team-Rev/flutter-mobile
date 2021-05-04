@@ -74,7 +74,7 @@ class AuthLogin extends StatelessWidget {
                       if (_formKey.currentState.validate()) {
                         print(_idController.text);
                         print(_pwController.text);
-                        server.postReq(context,_authProvider,'SignIn',
+                        server.doPost(context,'authenticate',
                             username: _idController.text,
                             password: _pwController.text);
                       }

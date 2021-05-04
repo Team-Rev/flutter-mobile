@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rev/pages/auth/auth_login.dart';
 import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/pages/main/main_test/Test_Question.dart';
 import 'package:rev/pages/main/main_test/test_main.dart';
@@ -25,8 +26,7 @@ class Server {
     print(response.data.toString());
   }
 
-  //DoPost
-  Future<dynamic> postReq(BuildContext context, function, String type,
+  void doPost(BuildContext context, String type,
       {username,
       password,
       userId,
@@ -36,19 +36,19 @@ class Server {
       phone,
       address,
       detailAddress,
-      postNumber}) async {
-    Response response;
+      postNumber}) {
     Map<String, dynamic> data;
-    Dio dio = Dio();
     String addr = '';
     List<Map<String, dynamic>> submitList = [];
-
     switch (type) {
-      case 'SignIn':
+
+      case 'authenticate':
         addr = 'authenticate';
         data = {"username": username, "password": password};
+        postReq(context, type, data, addr);
         break;
-      case 'SignUp':
+
+        case 'signup':
         addr = 'signup';
         data = {
           "userId": userId,
@@ -61,42 +61,56 @@ class Server {
           "detailAddress": detailAddress,
           "postNumber": postNumber
         };
+        postReq(context, type, data, addr);
         break;
+
         case 'submit':
-          dio.options.headers.addAll(({'Authorization': 'Bearer ${Secret.token}'}));
+        addr = 'problem/submit';
+        var options =
+            BaseOptions(headers: {'Authorization': 'Bearer ${Secret.token}'});
+        submitList.clear();
 
-      submitList.clear();
-      for (int i = 0; i < Questions.submitList.length; i++) {
-        submitList.add({
-          'questionId': Questions.questionNumList[i],
-          'multipleChoiceIds': Questions.submitList[i]
-        });
-      }
-      addr = 'problem/submit';
-      data = {
-        'userId': 'user@naver.com',
-        'submitList': submitList,
-      };
-      break;
+        for (int i = 0; i < Questions.submitList.length; i++) {
+          submitList.add({
+            'questionId': Questions.questionNumList[i],
+            'multipleChoiceIds': Questions.submitList[i]
+          });
+        }
+        data = {
+          'userId': 'user@naver.com',
+          'submitList': submitList,
+        };
+        postReq(context, type, data, addr,options: options);
+        break;
     }
+    // postReq(context, type, data, addr, options: options);
+  }
 
+  //DoPost
+  Future<dynamic> postReq(BuildContext context, String type, data,String addr,
+      {options}) async {
+    Response response;
+    Dio dio = Dio(options);
+    print('hi');
     //DoPostRequest
     print('${Secret.path}$addr');
     response = await dio.post('${Secret.path}$addr', data: data);
     print("result" + response.data.toString());
+
     if (response.data.toString() == null) return false;
     switch (type) {
-      case 'SignIn':
+      case 'authenticate':
         //TODO Success, Fail 판별해서 팝업 띄우기 추가
         Secret.setToken(response.data['jwt']);
-        function.goToMain();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MainWidget()));
+        // gotomain
         break;
-      case 'SignUp':
+      case 'signup':
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AuthLogin()));
         //TODO Success, Fail 판별해서 팝업 띄우기 추가
         break;
-      case 'FindId':
-      case 'FindPw':
-      case 'CheckIdValidate':
       case 'submit':
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => MainWidget()));
@@ -143,7 +157,6 @@ class Server {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => TestQuestion()));
         break;
-
     }
   }
 }
