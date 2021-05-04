@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rev/provider/provider_test.dart';
 
 import '../../../dio_server.dart';
-import '../../../reusable.dart';
+import '../../../util/reusable.dart';
 
 
 class TestPage extends Page {

@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rev/provider/provider_test.dart';
-import 'package:rev/provider/questions.dart';
+import 'package:rev/pages/main/main_test/test_questions.dart';
 
-import '../../../color_rev.dart';
+import '../../../util/color_rev.dart';
 import '../../../dio_server.dart';
-import '../../../reusable.dart';
+import '../../../util/reusable.dart';
 
 class TestQuestion extends StatelessWidget {
   QuestionProvider _questionProvider;

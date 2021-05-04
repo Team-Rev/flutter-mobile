@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rev/color_rev.dart';
+import 'package:rev/util/color_rev.dart';
 import 'package:rev/pages/auth/auth_register.dart';
 import 'package:rev/provider/provider_auth.dart';
 

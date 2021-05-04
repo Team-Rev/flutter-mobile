@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rev/provider/questions.dart';
+import 'package:rev/pages/main/main_test/test_questions.dart';
 
 class QuestionProvider extends ChangeNotifier {
   int _currentQuestion = 0;

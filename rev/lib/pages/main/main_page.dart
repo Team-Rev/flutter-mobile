@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rev/color_rev.dart';
+import 'package:rev/util/color_rev.dart';
 import 'package:rev/pages/main/main_default.dart';
 import 'package:rev/pages/main/main_profile.dart';
 import 'package:rev/pages/main/main_test/test_main.dart';

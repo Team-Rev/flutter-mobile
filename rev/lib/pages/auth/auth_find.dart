@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rev/provider/provider_auth.dart';
 
-import '../../color_rev.dart';
-import '../../reusable.dart';
+import '../../util/color_rev.dart';
+import '../../util/reusable.dart';
 
 class AuthFind extends StatefulWidget {
   final pageName = 'AuthFind';

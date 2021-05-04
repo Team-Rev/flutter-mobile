@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rev/pages/auth/auth_login.dart';
 import 'package:rev/pages/main/main_page.dart';
-import 'package:rev/pages/main/main_test/Test_Question.dart';
+import 'package:rev/pages/main/main_test/test_question.dart';
 import 'package:rev/pages/main/main_test/test_main.dart';
-import 'package:rev/provider/questions.dart';
+import 'package:rev/pages/main/main_test/test_questions.dart';
 import 'package:rev/secret.dart';
 
 //http형식으로 데이터 요청
