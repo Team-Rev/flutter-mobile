@@ -44,7 +44,7 @@ class ReUsable {
   }
 
   static TextFormField buildTextFormField(
-      TextEditingController controller, Icon icon, String labelText) {
+      TextEditingController controller, Icon icon, String labelText,{keyboardType}) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
@@ -52,6 +52,7 @@ class ReUsable {
         labelText: labelText,
         errorStyle: TextStyle(color: ColorRev.red, fontWeight: FontWeight.bold),
       ),
+      keyboardType: keyboardType,
       validator: (text) {
         if (text == null || text.isEmpty) return 'Please input correctly';
         return null;

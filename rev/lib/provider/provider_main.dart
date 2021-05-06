@@ -5,7 +5,7 @@ class MainProvider extends ChangeNotifier {
 
   int get currentPage => _currentPage;
 
-  void updateStatePage(int state) {
+  void updateState(int state) {
     _currentPage = state;
     notifyListeners();
   }

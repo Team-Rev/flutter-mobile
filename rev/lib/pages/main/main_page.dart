@@ -7,6 +7,8 @@ import 'package:rev/pages/main/main_profile.dart';
 import 'package:rev/pages/main/main_test/test_main.dart';
 import 'package:rev/provider/provider_main.dart';
 
+import 'main_test/test_question_select.dart';
+
 
 class MainPage extends Page {
   @override
@@ -41,6 +43,8 @@ class MainWidget extends StatelessWidget {
         return MainDefault();
       case 2:
         return MainTest();
+      // case 3:
+      //   return SelectQuestion();
     }
     return Container();
   }
@@ -54,7 +58,7 @@ class MainWidget extends StatelessWidget {
       currentIndex: _mainProvider.currentPage,
       selectedItemColor: ColorRev.g3,
       onTap: (index) {
-        _mainProvider.updateStatePage(index);
+        _mainProvider.updateState(index);
       },
     );
   }

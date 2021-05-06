@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rev/pages/main/main_profile.dart';
+import 'package:rev/pages/main/main_test/test_question_select.dart';
+import 'package:rev/provider/provider_main.dart';
 import 'package:rev/provider/provider_test.dart';
 
 import '../../../dio_server.dart';
@@ -67,11 +70,12 @@ class MainTest extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
-            child: Consumer<QuestionProvider>(
+            child: Consumer<MainProvider>(
               builder: (context,provider,child) {
                 return ReUsable.buildTextButton4('문제 풀기', () {
-                  provider.updateCurrentQuestion(0);
-                  server.getReqToQuery(context,'getQuestionByRange',start: 1,end: 5);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>SelectQuestion()));
+                  // provider.updateCurrentQuestion(0);
+                  // server.getReqToQuery(context,'getQuestionByRange',start: 1,end: 5);
                   // Navigator.push(context, MaterialPageRoute(builder: (context) =>TestQuestion()));
 
                 }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold));
