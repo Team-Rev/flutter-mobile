@@ -77,7 +77,7 @@ class Server {
           });
         }
         data = {
-          'userId': 'user@naver.com',
+          'userId': Secret.getSub,
           'submitList': submitList,
         };
         postReq(context, type, data, addr,options: options);

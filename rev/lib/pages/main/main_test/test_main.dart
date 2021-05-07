@@ -92,7 +92,6 @@ class MainTest extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
             child: ReUsable.buildTextButton4('키워드 선택 풀기', () {
-              server.getReq();
             }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
           ),
         ),
@@ -105,7 +104,6 @@ class MainTest extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
             child: ReUsable.buildTextButton4('문제기록 보기', () {
-              server.getReq();
             }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
           ),
         ),
@@ -118,7 +116,6 @@ class MainTest extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
             child: ReUsable.buildTextButton4('문의하기', () {
-              server.getReq();
             }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
           ),
         ),

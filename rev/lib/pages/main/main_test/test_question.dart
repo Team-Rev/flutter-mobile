@@ -35,7 +35,7 @@ class TestQuestion extends StatelessWidget {
                           [index[i].toString()]);
                 _questionProvider.notifyListeners();
               },
-              child: Text(index[i].toString()),
+              child: Text(index[i].toString(),style: TextStyle(fontSize: 20),),
               style: TextButton.styleFrom(
                   alignment: Alignment.centerLeft,
                   primary: Questions
@@ -59,7 +59,7 @@ class TestQuestion extends StatelessWidget {
     _questionProvider = Provider.of<QuestionProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: ColorRev.g1,
+      backgroundColor: ColorRev.g3,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -82,6 +82,7 @@ class TestQuestion extends StatelessWidget {
                         Questions
                             .questionList[_questionProvider.currentQuestion],
                         overflow: TextOverflow.clip,
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                   ],
