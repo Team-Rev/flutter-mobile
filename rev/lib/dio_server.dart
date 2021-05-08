@@ -7,6 +7,8 @@ import 'package:rev/pages/main/main_test/test_question.dart';
 import 'package:rev/pages/main/main_test/test_main.dart';
 import 'package:rev/pages/main/main_test/test_questions.dart';
 import 'package:rev/secret.dart';
+import 'package:rev/util/color_rev.dart';
+import 'package:rev/util/reusable.dart';
 
 //http형식으로 데이터 요청
 
@@ -41,14 +43,13 @@ class Server {
     String addr = '';
     List<Map<String, dynamic>> submitList = [];
     switch (type) {
-
       case 'authenticate':
         addr = 'authenticate';
         data = {"username": username, "password": password};
         postReq(context, type, data, addr);
         break;
 
-        case 'signup':
+      case 'signup':
         addr = 'signup';
         data = {
           "userId": userId,
@@ -64,7 +65,7 @@ class Server {
         postReq(context, type, data, addr);
         break;
 
-        case 'submit':
+      case 'submit':
         addr = 'problem/submit';
         var options =
             BaseOptions(headers: {'Authorization': 'Bearer ${Secret.token}'});
@@ -80,14 +81,14 @@ class Server {
           'userId': Secret.getSub,
           'submitList': submitList,
         };
-        postReq(context, type, data, addr,options: options);
+        postReq(context, type, data, addr, options: options);
         break;
     }
     // postReq(context, type, data, addr, options: options);
   }
 
   //DoPost
-  Future<dynamic> postReq(BuildContext context, String type, data,String addr,
+  Future<dynamic> postReq(BuildContext context, String type, data, String addr,
       {options}) async {
     Response response;
     Dio dio = Dio(options);
@@ -112,13 +113,84 @@ class Server {
         //TODO Success, Fail 판별해서 팝업 띄우기 추가
         break;
       case 'submit':
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainWidget()));
+        return showDialog<void>(
+            context: context,
+            // barrierDismissible: false,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                title: Text('시험 결과'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: [
+                      Text('5개의 문제 중',style: TextStyle(color: ColorRev.white),),
+                      Text('3개를 맞췄습니다 !',style: TextStyle(color: ColorRev.white),),
+                    ],
+                  ),
+                ),
+                elevation: 7,
+                backgroundColor: ColorRev.g3,
+                actionsPadding: EdgeInsets.symmetric(horizontal: 64),
+                actions: [
+                  Expanded(
+                    child: ButtonBar(
+                      alignment: MainAxisAlignment.center,
+                      children: [
+                        ReUsable.buildTextButton(
+                          '상세보기',
+                          Colors.transparent,
+                          ColorRev.white,
+                          onPressed:() {},
+                        ),
+                        ReUsable.buildTextButton(
+                          '목록으로',
+                          Colors.transparent,
+                          ColorRev.white,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainWidget()));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                ],
+              );
+            });
+
         break;
     }
     return true;
   }
 
+/*Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text('This is a demo alert dialog'),
+                Text('This is a demo alert dialog'),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(child: Text('OK'),onPressed: () {},),
+            TextButton(child: Text('OK'),onPressed: () {},),
+          ],
+        );
+      }
+    );
+
+
+  }*/
 //getRequestWithQuery
   Future<void> getReqToQuery(
     BuildContext context,

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class MainProvider extends ChangeNotifier {
-  int _currentPage = 0;
+  int _currentPage = 1;
 
   int get currentPage => _currentPage;
 

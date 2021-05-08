@@ -37,14 +37,11 @@ class MainWidget extends StatelessWidget {
   }
   Widget _navigationBody() {
     switch(_mainProvider.currentPage) {
-      case 0:
-        return MainProfile();
-      case 1:
-        return MainDefault();
-      case 2:
-        return MainTest();
-      // case 3:
-      //   return SelectQuestion();
+      case 0: return MainProfile();
+
+      case 1: return MainDefault();
+
+      case 2: return MainTest();
     }
     return Container();
   }

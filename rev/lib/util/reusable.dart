@@ -33,11 +33,11 @@ class ReUsable {
     );
   }
 
-  TextButton buildTextButton(Text, Color color, Color fontColor,
+  static TextButton buildTextButton(String text, Color color, Color fontColor,
       {onPressed, padding}) {
     return TextButton(
       onPressed: onPressed,
-      child: Text,
+      child: Text(text),
       style: TextButton.styleFrom(
           primary: fontColor, backgroundColor: color, padding: padding),
     );
