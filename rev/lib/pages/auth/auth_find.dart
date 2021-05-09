@@ -54,8 +54,8 @@ class _AuthFindState extends State<AuthFind> {
             ),
           ),
           Card(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             //카드 색
             color: ColorRev.white,
             elevation: 7,
@@ -121,8 +121,7 @@ class _AuthFindState extends State<AuthFind> {
                           width: MediaQuery.of(context).size.width * 0.3,
                         ),
                         Container(
-                          child:
-                              ReUsable.buildTextButton2("Back to Menu", () {
+                          child: ReUsable.buildTextButton2("Back to Menu", () {
                             _authProvider.updateStatePage('AuthLogin');
                           }),
                           width: MediaQuery.of(context).size.width * 0.3,

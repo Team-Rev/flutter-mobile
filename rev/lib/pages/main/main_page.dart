@@ -9,7 +9,6 @@ import 'package:rev/provider/provider_main.dart';
 
 import 'main_test/test_question_select.dart';
 
-
 class MainPage extends Page {
   @override
   Route createRoute(BuildContext context) {
@@ -19,7 +18,7 @@ class MainPage extends Page {
 }
 
 class MainWidget extends StatelessWidget {
-  final String pageName="MainPage";
+  final String pageName = "MainPage";
   MainProvider _mainProvider;
 
   @override
@@ -35,22 +34,36 @@ class MainWidget extends StatelessWidget {
       bottomNavigationBar: _bottomNavigationBarWidget(),
     );
   }
+
   Widget _navigationBody() {
-    switch(_mainProvider.currentPage) {
-      case 0: return MainProfile();
+    switch (_mainProvider.currentPage) {
+      case 0:
+        return MainProfile();
 
-      case 1: return MainDefault();
+      case 1:
+        return MainDefault();
 
-      case 2: return MainTest();
+      case 2:
+        return MainTest();
     }
     return Container();
   }
+
   Widget _bottomNavigationBarWidget() {
     return BottomNavigationBar(
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.account_circle),activeIcon:Icon(Icons.account_circle_outlined),label: 'Profile'),
-        BottomNavigationBarItem(icon: Icon(Icons.assignment),activeIcon:Icon(Icons.assignment_outlined),label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.wb_incandescent),activeIcon:Icon(Icons.wb_incandescent_outlined),label: 'Study'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            activeIcon: Icon(Icons.account_circle_outlined),
+            label: 'Profile'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.assignment),
+            activeIcon: Icon(Icons.assignment_outlined),
+            label: 'Home'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.wb_incandescent),
+            activeIcon: Icon(Icons.wb_incandescent_outlined),
+            label: 'Study'),
       ],
       currentIndex: _mainProvider.currentPage,
       selectedItemColor: ColorRev.g3,

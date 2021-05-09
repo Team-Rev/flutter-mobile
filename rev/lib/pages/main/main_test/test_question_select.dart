@@ -24,7 +24,7 @@ class SelectQuestion extends StatelessWidget {
       backgroundColor: ColorRev.g3,
       body: Center(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 24.0,horizontal: 24),
+          padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 24),
           height: 300,
           alignment: Alignment.center,
           child: Card(
@@ -51,11 +51,13 @@ class SelectQuestion extends StatelessWidget {
                         SizedBox(
                             width: 100,
                             child: ReUsable.buildTextFormField(
-                                _startController, null, '시작번호',keyboardType: TextInputType.number)),
+                                _startController, null, '시작번호',
+                                keyboardType: TextInputType.number)),
                         SizedBox(
                             width: 100,
                             child: ReUsable.buildTextFormField(
-                                _endController, null, '끝번호',keyboardType: TextInputType.number)),
+                                _endController, null, '끝번호',
+                                keyboardType: TextInputType.number)),
                       ],
                     ),
                     Padding(
@@ -65,7 +67,9 @@ class SelectQuestion extends StatelessWidget {
                           return ReUsable.buildTextButton2('풀기 시작', () {
                             provider.updateCurrentQuestion(0);
                             server.getReqToQuery(context, 'getQuestionByRange',
-                                start: int.parse(_startController.text.toString()), end: int.parse(_endController.text.toString()));
+                                start:
+                                    int.parse(_startController.text.toString()),
+                                end: int.parse(_endController.text.toString()));
                             // Navigator.push(
                             //     context,
                             //     MaterialPageRoute(

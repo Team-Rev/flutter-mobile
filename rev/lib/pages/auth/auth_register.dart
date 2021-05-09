@@ -133,18 +133,18 @@ class AuthRegister extends StatelessWidget {
                     children: [
                       Container(
                         child: ReUsable.buildTextButton2('Sign Up', () {
-                          server.doPost(context,
-                            "signup",
-                            userId: _idController.text.toString(),
-                            password: _pwController.text.toString(),
-                            nickname: _nickController.text.toString(),
-                            name: _nameController.text.toString(),
-                            DOB: _DOBController.text.toString(),
-                            phone: _phoneController.text.toString(),
-                            address: _addressController.text.toString(),
-                            detailAddress: _detailAddressController.text.toString(),
-                            postNumber: _postNumberController.text.toString()
-                          );
+                          server.doPost(context, "signup",
+                              userId: _idController.text.toString(),
+                              password: _pwController.text.toString(),
+                              nickname: _nickController.text.toString(),
+                              name: _nameController.text.toString(),
+                              DOB: _DOBController.text.toString(),
+                              phone: _phoneController.text.toString(),
+                              address: _addressController.text.toString(),
+                              detailAddress:
+                                  _detailAddressController.text.toString(),
+                              postNumber:
+                                  _postNumberController.text.toString());
                         }),
                         width: MediaQuery.of(context).size.width * 0.3,
                       ),

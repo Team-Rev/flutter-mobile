@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Questions {
   static List<String> _questionList = [];
   static get questionList => _questionList;
@@ -11,6 +13,12 @@ class Questions {
   static List<int> _questionNumList = [];
   static get questionNumList => _questionNumList;
 
+  static Map<String, dynamic> _questionResult;
+  static get questionResult => _questionResult;
+
+  static void initQuestionResult(dynamic value) {
+    _questionResult=value;
+  }
 
   static void init(dynamic value) {
     _question.clear();

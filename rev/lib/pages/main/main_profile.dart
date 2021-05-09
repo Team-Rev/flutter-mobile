@@ -10,7 +10,8 @@ class MainProfile extends StatelessWidget {
       child: Container(
         height: 300,
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -18,7 +19,8 @@ class MainProfile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('토큰 \n ${Secret.token}'),
-                Text('\n해석하면 \n\nUserId : ${Secret.getSub}\nIAT : ${Secret.getIat}\nEXP : ${Secret.getExp}'),
+                Text(
+                    '\n해석하면 \n\nUserId : ${Secret.getSub}\nIAT : ${Secret.getIat}\nEXP : ${Secret.getExp}'),
               ],
             ),
           ),

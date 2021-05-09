@@ -113,54 +113,62 @@ class Server {
         //TODO Success, Fail 판별해서 팝업 띄우기 추가
         break;
       case 'submit':
+        Questions.initQuestionResult(response.data);
         return showDialog<void>(
             context: context,
             // barrierDismissible: false,
             builder: (BuildContext context) {
               return AlertDialog(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                title: Text('시험 결과'),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: [
-                      Text('5개의 문제 중',style: TextStyle(color: ColorRev.white),),
-                      Text('3개를 맞췄습니다 !',style: TextStyle(color: ColorRev.white),),
-                    ],
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                title: Center(child: Text('시험 결과',style: TextStyle(color: ColorRev.white,fontSize:24,fontWeight: FontWeight.bold,),)),
+                contentPadding: EdgeInsets.fromLTRB(24, 12, 24, 0),
+                content: Container(
+                  height: 100,
+                  child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                    elevation: 0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('${Questions.questionResult['totalCount']}개의 문제 중',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                        Text('${Questions.questionResult['correctCount']}개를 맞췄습니다 !',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                      ],
+                    ),
                   ),
                 ),
                 elevation: 7,
                 backgroundColor: ColorRev.g3,
                 actionsPadding: EdgeInsets.symmetric(horizontal: 64),
+                actionsOverflowButtonSpacing: 100,
                 actions: [
-                  Expanded(
-                    child: ButtonBar(
-                      alignment: MainAxisAlignment.center,
-                      children: [
-                        ReUsable.buildTextButton(
-                          '상세보기',
-                          Colors.transparent,
-                          ColorRev.white,
-                          onPressed:() {},
-                        ),
-                        ReUsable.buildTextButton(
-                          '목록으로',
-                          Colors.transparent,
-                          ColorRev.white,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainWidget()));
-                          },
-                        ),
-                      ],
+                  SizedBox(
+                    width: 72,
+                    child: ReUsable.buildTextButton(
+                      '상세보기',
+                      Colors.transparent,
+                      ColorRev.white,
+                      onPressed:() {},
+                    ),
+                  ),
+                  SizedBox(
+                    width: 72,
+                    child: ReUsable.buildTextButton(
+                      '목록으로',
+                      Colors.transparent,
+                      ColorRev.white,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainWidget()));
+                      },
                     ),
                   ),
 
                 ],
               );
             });
-
         break;
     }
     return true;

@@ -55,7 +55,8 @@ class MainTest extends StatelessWidget {
                   width: 30,
                 ),
                 Icon(
-                  Icons.accessibility,
+                  Icons.account_circle_sharp,
+                  color: Colors.grey,
                   size: 128,
                 ),
               ],

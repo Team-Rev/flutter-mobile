@@ -11,10 +11,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-      // MaterialApp(home: TestQuestionFinal(),);
-
-      MultiProvider(
+    return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => MainProvider()),
@@ -45,9 +42,5 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-
-
-
-
   }
 }

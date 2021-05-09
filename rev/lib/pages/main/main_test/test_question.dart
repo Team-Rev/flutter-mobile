@@ -35,7 +35,10 @@ class TestQuestion extends StatelessWidget {
                           [index[i].toString()]);
                 _questionProvider.notifyListeners();
               },
-              child: Text(index[i].toString(),style: TextStyle(fontSize: 20),),
+              child: Text(
+                '${i + 1}. ${index[i].toString()}',
+                style: TextStyle(fontSize: 20),
+              ),
               style: TextButton.styleFrom(
                   alignment: Alignment.centerLeft,
                   primary: Questions
@@ -63,9 +66,10 @@ class TestQuestion extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
+          verticalDirection: VerticalDirection.up,
           children: [
             SizedBox(
-              height: 64,
+              height: 16,
             ),
             Card(
               shape: RoundedRectangleBorder(
@@ -74,54 +78,17 @@ class TestQuestion extends StatelessWidget {
               color: ColorRev.white,
               elevation: 7,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        Questions
-                            .questionList[_questionProvider.currentQuestion],
-                        overflow: TextOverflow.clip,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32)),
-              //카드 색
-              color: ColorRev.white,
-              elevation: 7,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                child: Column(
-                  children: getAnsweer(Questions
-                      .answerList[_questionProvider.currentQuestion].keys
-                      .toList()),
-                ),
-              ),
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32)),
-              //카드 색
-              color: ColorRev.white,
-              elevation: 7,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(bottom: 7),
                 child: Column(
                   children: [
                     ButtonBar(
                       alignment: MainAxisAlignment.spaceAround,
                       children: [
-                        ReUsable.buildTextButton2('이전 문제', () {
+                        ReUsable.buildTextButton2('이전', () {
                           _questionProvider.previousCurrentQuestion();
                         }),
-                        ReUsable.buildTextButton2('문제 찜❤', () {}),
-                        ReUsable.buildTextButton2('다음 문제', () {
+                        ReUsable.buildTextButton2('찜 ❤', () {}),
+                        ReUsable.buildTextButton2('다음', () {
                           _questionProvider.nextCurrentQuestion();
                         }),
                       ],
@@ -131,7 +98,7 @@ class TestQuestion extends StatelessWidget {
                       children: [
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 5),
-                          width: MediaQuery.of(context).size.width * 0.45,
+                          width: MediaQuery.of(context).size.width * 0.43,
                           height: 20,
                           child: LinearProgressIndicator(
                             value: _questionProvider.currentQuestion /
@@ -150,7 +117,51 @@ class TestQuestion extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: 64,
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32)),
+              //카드 색
+              color: ColorRev.white,
+              elevation: 7,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                child: Column(
+                  children: getAnsweer(Questions
+                      .answerList[_questionProvider.currentQuestion].keys
+                      .toList()),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32)),
+              //카드 색
+              color: ColorRev.white,
+              elevation: 7,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        Questions
+                            .questionList[_questionProvider.currentQuestion],
+                        overflow: TextOverflow.clip,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
