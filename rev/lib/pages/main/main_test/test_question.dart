@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rev/provider/provider_test.dart';
-import 'package:rev/pages/main/main_test/test_questions.dart';
+import 'package:rev/repository/test_questions.dart';
 
 import '../../../util/color_rev.dart';
 import '../../../dio_server.dart';

@@ -5,7 +5,9 @@ import 'package:rev/pages/auth/auth_login.dart';
 import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/pages/main/main_test/test_question.dart';
 import 'package:rev/pages/main/main_test/test_main.dart';
-import 'package:rev/pages/main/main_test/test_questions.dart';
+import 'package:rev/pages/main/main_test/test_showresult.dart';
+import 'package:rev/repository/test_questions.dart';
+import 'package:rev/repository/test_results.dart';
 import 'package:rev/secret.dart';
 import 'package:rev/util/color_rev.dart';
 import 'package:rev/util/reusable.dart';
@@ -22,7 +24,7 @@ class Server {
     Dio dio = Dio(options);
     //DogetRequest
     response = await dio.get(
-      "${Secret.path}problem/rangeQuestions?start=1&end=10",
+      "${Secret.path}problem/answer/result?",
     );
 
     print(response.data.toString());
@@ -119,20 +121,38 @@ class Server {
             // barrierDismissible: false,
             builder: (BuildContext context) {
               return AlertDialog(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-                title: Center(child: Text('시험 결과',style: TextStyle(color: ColorRev.white,fontSize:24,fontWeight: FontWeight.bold,),)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32)),
+                title: Center(
+                    child: Text(
+                  '시험 결과',
+                  style: TextStyle(
+                    color: ColorRev.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
                 contentPadding: EdgeInsets.fromLTRB(24, 12, 24, 0),
                 content: Container(
                   height: 100,
                   child: Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32)),
                     elevation: 0,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('${Questions.questionResult['totalCount']}개의 문제 중',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                        Text('${Questions.questionResult['correctCount']}개를 맞췄습니다 !',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                        Text(
+                          '${Questions.questionResult['totalCount']}개의 문제 중',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${Questions.questionResult['correctCount']}개를 맞췄습니다 !',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
                   ),
@@ -148,7 +168,7 @@ class Server {
                       '상세보기',
                       Colors.transparent,
                       ColorRev.white,
-                      onPressed:() {},
+                      onPressed: () {},
                     ),
                   ),
                   SizedBox(
@@ -165,7 +185,6 @@ class Server {
                       },
                     ),
                   ),
-
                 ],
               );
             });
@@ -220,22 +239,27 @@ class Server {
           'end': end,
         };
         break;
+      case 'getResults':
+        addr = 'problem/answer/result';
+        queryParameters = {
+          'id': Secret.getSub,
+        };
+        break;
     }
     response =
         await dio.get('${Secret.path}$addr', queryParameters: queryParameters);
-    // List<dynamic>data=response.data;
-    // print(response.data.toString());
-    dynamic question = [];
-    question = response.data;
 
-    print(question.toString());
-    // Questions.init(Questions.question);
-    Questions.init(question);
-    // print(response.data.toString());
     switch (type) {
       case 'getQuestionByRange':
+        print(response.data.toString());
+        Questions.init(response.data);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => TestQuestion()));
+        break;
+      case 'getResults':
+        Results.init(response.data);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ShowResult()));
         break;
     }
   }
