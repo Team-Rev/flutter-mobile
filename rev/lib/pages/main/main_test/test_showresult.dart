@@ -44,7 +44,7 @@ class ShowResult extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            '${Results.resultList[index]['answerMain']['totalCount'].toString()}/${Results.resultList[index]['answerMain']['correctCount'].toString()}',
+                            '${Results.resultList[index]['answerMain']['correctCount'].toString()}/${Results.resultList[index]['answerMain']['total Count'].toString()}',
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           ),
@@ -123,7 +123,9 @@ class ShowResult extends StatelessWidget {
                   },
                 )),
           ),
-          SizedBox(height: 16,)
+          SizedBox(
+            height: 16,
+          )
         ],
       ),
     );

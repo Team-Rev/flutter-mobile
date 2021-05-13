@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rev/pages/main/main_profile.dart';
 import 'package:rev/pages/main/main_test/test_question_select.dart';
 import 'package:rev/pages/main/main_test/test_showresult.dart';
+import 'package:rev/pages/main/main_test/test_showresult_detail.dart';
 import 'package:rev/provider/provider_main.dart';
 import 'package:rev/provider/provider_test.dart';
 
@@ -119,6 +120,8 @@ class MainTest extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
             child: ReUsable.buildTextButton4('문의하기', () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => ResultDetail()));
             }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
           ),
         ),
