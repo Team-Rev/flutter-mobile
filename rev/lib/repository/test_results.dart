@@ -1,10 +1,18 @@
 class Results {
-  static var _resultList = [];
+  static var _resultSummary = [];
 
-  static get resultList => _resultList;
+  static get resultSummary => _resultSummary;
 
-  static void init(var value) {
-    _resultList = value;
-    print(_resultList);
+  static var _resultQuestions=[];
+  static get resultQuestion=>_resultQuestions;
+ //TODO 객체 메소드 안에 넣을 수 있을거같은데?
+  static void initResultSummary(var value) {
+    _resultSummary = value;
+    print(_resultSummary);
   }
+  static void initResultQuestions(var value) {
+    _resultQuestions = value;
+    print(_resultQuestions);
+  }
+
 }

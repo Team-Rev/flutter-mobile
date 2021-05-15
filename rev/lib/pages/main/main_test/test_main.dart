@@ -120,8 +120,6 @@ class MainTest extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
             child: ReUsable.buildTextButton4('문의하기', () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => ResultDetail()));
             }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
           ),
         ),

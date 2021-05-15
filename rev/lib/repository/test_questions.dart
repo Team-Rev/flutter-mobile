@@ -25,7 +25,6 @@ class Questions {
     _answerList.clear();
     _submitList.clear();
     _question=value;
-    print(_question);
     if(_submitList.length==0)
       for(int i=0;i<value.length;i++) {
         _submitList.add([]);
@@ -41,10 +40,14 @@ class Questions {
       }
       _answerList.add(answer);
     }
+    print("answerList : $_answerList");
+    for(int i=0;i<_answerList.length;i++)
+      print("answerList : ${answerList[i]}");
     print("submitValue : $_submitList");
   }
   // static get questionLength => _question.length;
   // static get question => _question;
 
   static var _question =[];
+  static get question=>_question;
 }

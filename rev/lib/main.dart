@@ -4,6 +4,7 @@ import 'package:rev/pages/auth/auth_page.dart';
 import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/provider/provider_auth.dart';
 import 'package:rev/provider/provider_main.dart';
+import 'package:rev/provider/provider_pagechange.dart';
 import 'package:rev/provider/provider_test.dart';
 
 void main() => runApp(MyApp());
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => MainProvider()),
         ChangeNotifierProvider(create: (_) => QuestionProvider()),
+        ChangeNotifierProvider(create: (_) => CurrentPageListProvider()),
       ],
       child: MaterialApp(
         // title: 'Flutter Demo',

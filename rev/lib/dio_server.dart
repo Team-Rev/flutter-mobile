@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:rev/pages/auth/auth_login.dart';
 import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/pages/main/main_test/test_question.dart';
-import 'package:rev/pages/main/main_test/test_main.dart';
 import 'package:rev/pages/main/main_test/test_showresult.dart';
+import 'package:rev/pages/main/main_test/test_showresult_detail.dart';
+import 'package:rev/provider/provider_pagechange.dart';
 import 'package:rev/repository/test_questions.dart';
 import 'package:rev/repository/test_results.dart';
 import 'package:rev/secret.dart';
@@ -193,37 +194,14 @@ class Server {
     return true;
   }
 
-/*Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: [
-                Text('This is a demo alert dialog'),
-                Text('This is a demo alert dialog'),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(child: Text('OK'),onPressed: () {},),
-            TextButton(child: Text('OK'),onPressed: () {},),
-          ],
-        );
-      }
-    );
-
-
-  }*/
 //getRequestWithQuery
-  Future<void> getReqToQuery(
+  Future<dynamic> getReqToQuery(
     BuildContext context,
     String type, {
     int start,
     int end,
+        int page,
+        int answerMainId,
   }) async {
     Response response;
     var options =
@@ -240,12 +218,19 @@ class Server {
         };
         break;
       case 'getResults':
-        addr = 'problem/answer/result';
-        queryParameters = {
-          'id': Secret.getSub,
-        };
+        addr = 'problem/answer/summary';
+        queryParameters = {'id': Secret.getSub, 'page': 0};
+        break;
+      case 'getResults2':
+        addr = 'problem/answer/summary';
+        queryParameters = {'id': Secret.getSub, 'page': page};
+        break;
+      case 'getResultQuestions':
+        addr = 'problem/answer/detail';
+        queryParameters = {'id': answerMainId};
         break;
     }
+
     response =
         await dio.get('${Secret.path}$addr', queryParameters: queryParameters);
 
@@ -257,9 +242,18 @@ class Server {
             context, MaterialPageRoute(builder: (context) => TestQuestion()));
         break;
       case 'getResults':
-        Results.init(response.data);
+        Results.initResultSummary(response.data);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => ShowResult()));
+        break;
+      case 'getResults2':
+        return response.data;
+
+        break;
+      case 'getResultQuestions':
+        Results.initResultQuestions(response.data);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ResultDetail()));
         break;
     }
   }
