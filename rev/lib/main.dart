@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => MainProvider()),
         ChangeNotifierProvider(create: (_) => QuestionProvider()),
-        ChangeNotifierProvider(create: (_) => CurrentPageListProvider()),
       ],
       child: MaterialApp(
         // title: 'Flutter Demo',
