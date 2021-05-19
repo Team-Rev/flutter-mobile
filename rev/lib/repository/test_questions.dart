@@ -45,8 +45,6 @@ class Questions {
       print("answerList : ${answerList[i]}");
     print("submitValue : $_submitList");
   }
-  // static get questionLength => _question.length;
-  // static get question => _question;
 
   static var _question =[];
   static get question=>_question;

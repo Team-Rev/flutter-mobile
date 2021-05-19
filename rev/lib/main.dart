@@ -4,7 +4,6 @@ import 'package:rev/pages/auth/auth_page.dart';
 import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/provider/provider_auth.dart';
 import 'package:rev/provider/provider_main.dart';
-import 'package:rev/provider/provider_pagechange.dart';
 import 'package:rev/provider/provider_test.dart';
 
 void main() => runApp(MyApp());
