@@ -73,17 +73,9 @@ class MainTest extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0)),
             elevation: 7,
-            child: Consumer<MainProvider>(
-              builder: (context,provider,child) {
-                return ReUsable.buildTextButton4('문제 풀기', () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>SelectQuestion()));
-                  // provider.updateCurrentQuestion(0);
-                  // server.getReqToQuery(context,'getQuestionByRange',start: 1,end: 5);
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) =>TestQuestion()));
-
-                }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold));
-              },
-            ),
+            child: ReUsable.buildTextButton4('문제 풀기', () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>SelectQuestion()));
+            }, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
           ),
         ),
         Container(

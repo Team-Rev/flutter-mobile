@@ -19,34 +19,48 @@ class MainPage extends Page {
 
 class MainWidget extends StatelessWidget {
   final String pageName = "MainPage";
+  PageController controller;
   MainProvider _mainProvider;
 
   @override
   Widget build(BuildContext context) {
     _mainProvider = Provider.of<MainProvider>(context);
+    controller = PageController(initialPage: _mainProvider.currentPage);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ColorRev.g3,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: _navigationBody(),
+        child: _navigationBody2(),
       ),
       bottomNavigationBar: _bottomNavigationBarWidget(),
     );
   }
 
-  Widget _navigationBody() {
-    switch (_mainProvider.currentPage) {
-      case 0:
-        return MainProfile();
-
-      case 1:
-        return MainDefault();
-
-      case 2:
-        return MainTest();
-    }
-    return Container();
+  // Widget _navigationBody() {
+  //   switch (_mainProvider.currentPage) {
+  //     case 0:
+  //       return MainProfile();
+  //
+  //     case 1:
+  //       return MainDefault();
+  //
+  //     case 2:
+  //       return MainTest();
+  //   }
+  //   return Container();
+  // }
+  Widget _navigationBody2() {
+    return PageView(
+      onPageChanged:(index) {_mainProvider.updateState(index);},
+      scrollDirection: Axis.horizontal,
+      controller: controller,
+      children: [
+        MainProfile(),
+        MainDefault(),
+        MainTest(),
+      ],
+    );
   }
 
   Widget _bottomNavigationBarWidget() {
@@ -69,6 +83,7 @@ class MainWidget extends StatelessWidget {
       selectedItemColor: ColorRev.g3,
       onTap: (index) {
         _mainProvider.updateState(index);
+        controller.jumpToPage(index);
       },
     );
   }
