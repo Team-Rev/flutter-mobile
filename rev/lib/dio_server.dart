@@ -6,6 +6,7 @@ import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/pages/main/main_test/test_question.dart';
 import 'package:rev/pages/main/main_test/test_showresult.dart';
 import 'package:rev/pages/main/main_test/test_showresult_detail.dart';
+import 'package:rev/repository/default_board.dart';
 import 'package:rev/repository/test_questions.dart';
 import 'package:rev/repository/test_results.dart';
 import 'package:rev/secret.dart';
@@ -16,17 +17,22 @@ import 'package:rev/util/reusable.dart';
 
 class Server {
   //Future란? 정리해서 올리기
-  Future<void> getReq() async {
+  Future<void> getReq(String type) async {
     //Response : Dio에서 가져와서 사용. Data 반환
     Response response;
-    var options =
-        BaseOptions(headers: {'Authorization': 'Bearer ${Secret.token}'});
-    Dio dio = Dio(options);
+    // var options =
+    //     BaseOptions(headers: {'Authorization': 'Bearer ${Secret.token}'});
+    Dio dio = Dio();
+    String addr;
+    switch(type) {
+      case 'getPinedBoard':
+        addr='board/notice-pined';
+    }
     //DogetRequest
     response = await dio.get(
-      "${Secret.path}problem/answer/result?",
+      "${Secret.path}$addr",
     );
-
+    Boards.initBoards(response.data );
     print(response.data.toString());
   }
 
