@@ -17,7 +17,7 @@ import 'package:rev/util/reusable.dart';
 
 class Server {
   //Future란? 정리해서 올리기
-  Future<void> getReq(String type) async {
+  Future<dynamic> getReq(String type,{page}) async {
     //Response : Dio에서 가져와서 사용. Data 반환
     Response response;
     // var options =
@@ -27,13 +27,32 @@ class Server {
     switch(type) {
       case 'getPinedBoard':
         addr='board/notice-pined';
+        break;
+      case 'getNextBoard':
+        addr='board/notice?page=$page';
+        break;
+      case 'getPinedBoardAndPage':
+        addr='board/notice-first?page=0';
+        break;
     }
     //DogetRequest
     response = await dio.get(
       "${Secret.path}$addr",
     );
-    Boards.initBoards(response.data);
-    print(response.data.toString());
+
+    switch(type) {
+      case 'getPinedBoard':
+        Boards.initBoardsPined(response.data);
+        break;
+      case 'getNextBoard':
+        // Boards.initBoardsPage(response.data);
+        return response.data['notices'];
+        break;
+      case 'getPinedBoardAndPage':
+        Boards.initBoardsPined(response.data['pined']);
+        Boards.initBoardsPage(response.data['page']['notices']);
+        break;
+    }
   }
 
   void doPost(BuildContext context, String type,
@@ -54,7 +73,14 @@ class Server {
       case 'authenticate':
         addr = 'authenticate';
         data = {"username": username, "password": password};
-        postReq(context, type, data, addr);
+
+        // getReq('getPinedBoard');
+        // getReq('getNextBoard',page: 0);
+        getReq('getPinedBoardAndPage');
+        Future.delayed(Duration(seconds: 2,),() {
+          return postReq(context, type, data, addr);
+          // getReq('getNextBoard',page: 0);
+        } );
         break;
 
       case 'signup':
@@ -111,6 +137,10 @@ class Server {
       case 'authenticate':
         //TODO Success, Fail 판별해서 팝업 띄우기 추가
         Secret.setToken(response.data['jwt']);
+
+        // server.getReq('getPinedBoard');
+        // server.getReq('getNextBoard',page: 0);
+
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => MainWidget()));
         // gotomain
