@@ -7,15 +7,16 @@ import 'package:rev/pages/main/main_profile.dart';
 import 'package:rev/pages/main/main_test/test_main.dart';
 import 'package:rev/provider/provider_main.dart';
 
+import '../../dio_server.dart';
 import 'main_test/test_question_select.dart';
 
-class MainPage extends Page {
-  @override
-  Route createRoute(BuildContext context) {
-    return MaterialPageRoute(
-        settings: this, builder: (context) => MainWidget());
-  }
-}
+// class MainPage extends Page {
+//   @override
+//   Route createRoute(BuildContext context) {
+//     return MaterialPageRoute(
+//         settings: this, builder: (context) => MainWidget());
+//   }
+// }
 
 class MainWidget extends StatelessWidget {
   final String pageName = "MainPage";

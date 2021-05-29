@@ -32,7 +32,7 @@ class Server {
     response = await dio.get(
       "${Secret.path}$addr",
     );
-    Boards.initBoards(response.data );
+    Boards.initBoards(response.data);
     print(response.data.toString());
   }
 
