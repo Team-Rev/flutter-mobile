@@ -5,7 +5,7 @@ import 'package:rev/repository/test_results.dart';
 import 'package:rev/util/color_rev.dart';
 
 import '../../../dio_server.dart';
-import 'default_notice_detail.dart';
+import 'default_notice.dart';
 
 class MainDefault extends StatefulWidget {
   @override
@@ -108,7 +108,7 @@ class _MainDefaultState extends State<MainDefault> {
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
-                              color: Colors.red),
+                              ),
                         ),
                       ),
                       SizedBox(
@@ -119,7 +119,7 @@ class _MainDefaultState extends State<MainDefault> {
                         style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: Colors.red),
+                            ),
                       ),
                     ],
                   ),
@@ -128,14 +128,14 @@ class _MainDefaultState extends State<MainDefault> {
                     children: [
                       Text(
                         Boards.boardPined[index]['postDate'].toString(),
-                        style: TextStyle(fontSize: 10, color: Colors.red),
+                        style: TextStyle(fontSize: 10,),
                       ),
                       SizedBox(
                         width: 55,
                       ),
                       Text(
                         Boards.boardPined[index]['nickname'],
-                        style: TextStyle(fontSize: 10, color: Colors.red),
+                        style: TextStyle(fontSize: 10,),
                       ),
                     ],
                   ),
@@ -144,9 +144,11 @@ class _MainDefaultState extends State<MainDefault> {
               TextButton(
                 child: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.red,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  print(Boards.boardPined[index]['noticeId']);
+                  server.getReqToQuery(context, 'getBoardDetail',boardNum: index,isPined: true);
+                },
                 style: ColorRev.buttonStyle3,
               ),
             ],
@@ -275,13 +277,14 @@ class _MainDefaultState extends State<MainDefault> {
                     TextButton(
                       child: Text('자세히 보기'),
                       style: ColorRev.buttonStyle3,
-                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => DefaultNoticeDetail() ));},
+                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => DefaultNotice() ));},
                     ),
                   ],
                 ),
                 Divider(color: Colors.grey,thickness: 1,),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.34,
+                  height: MediaQuery.of(context).size.height * 0.331,
+                  padding: EdgeInsets.only(bottom: 8),
                   child: ListView.separated(
                     itemCount: Boards.boardPined.length,
                     itemBuilder: (context, index) {

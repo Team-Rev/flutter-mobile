@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rev/pages/auth/auth_login.dart';
+import 'package:rev/pages/main/main_default/default_notice_detail.dart';
 import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/pages/main/main_test/test_question.dart';
 import 'package:rev/pages/main/main_test/test_showresult.dart';
@@ -237,6 +238,8 @@ class Server {
     int end,
         int page,
         int answerMainId,
+        int boardNum,
+        bool isPined,
   }) async {
     Response response;
     var options =
@@ -264,10 +267,15 @@ class Server {
         addr = 'problem/answer/detail';
         queryParameters = {'id': answerMainId};
         break;
+      case 'getBoardDetail':
+        addr='board/notice-content';
+        queryParameters={'id':isPined ? Boards.boardPined[boardNum]['noticeId']:Boards.boardPage[boardNum]['noticeId']};
+        break;
     }
 
     response =
         await dio.get('${Secret.path}$addr', queryParameters: queryParameters);
+    print(response.data);
 
     switch (type) {
       case 'getQuestionByRange':
@@ -289,6 +297,14 @@ class Server {
         Results.initResultQuestions(response.data);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => ResultDetail()));
+        break;
+      case 'getBoardDetail':
+        if(isPined)
+              Boards.boardPined[boardNum].putIfAbsent('detail',() =>response.data);
+        else
+              Boards.boardPage[boardNum].putIfAbsent('detail',() =>response.data);
+
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>DefaultNoticeDetail(boardNum,isPined)));
         break;
     }
   }
