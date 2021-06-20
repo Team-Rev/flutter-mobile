@@ -11,4 +11,5 @@ class ColorRev {
   static ButtonStyle buttonStyle1=TextButton.styleFrom(primary: white,backgroundColor: g3);
   static ButtonStyle buttonStyle2=TextButton.styleFrom(primary: white,backgroundColor: Colors.transparent);
   static ButtonStyle buttonStyle3=TextButton.styleFrom(primary: grey,backgroundColor: Colors.transparent);
+  static ButtonStyle buttonStyle4=TextButton.styleFrom(primary: g3,backgroundColor: white);
 }

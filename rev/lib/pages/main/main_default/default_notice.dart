@@ -131,7 +131,7 @@ class _DefaultNoticeState extends State<DefaultNotice> {
               ),
               TextButton(
                 child: Icon(Icons.arrow_forward_ios, color: Colors.red,),
-                onPressed: () {server.getReqToQuery(context, 'getBoardDetail',boardNum: Boards.boardPined[index]['noticeId'],isPined: true);},
+                onPressed: () {server.getReqToQuery(context, 'getBoardDetail',boardNum: index,isPined: true);},
                 style: ColorRev.buttonStyle3,
               ),
             ],
@@ -196,7 +196,7 @@ class _DefaultNoticeState extends State<DefaultNotice> {
               ),
               TextButton(
                 child: Icon(Icons.arrow_forward_ios),
-                onPressed: () {server.getReqToQuery(context, 'getBoardDetail',boardNum: Boards.boardPined[index]['noticeId'],isPined: true);},
+                onPressed: () {server.getReqToQuery(context, 'getBoardDetail',boardNum: index,isPined: false);},
                 style: ColorRev.buttonStyle3,
               ),
             ],
