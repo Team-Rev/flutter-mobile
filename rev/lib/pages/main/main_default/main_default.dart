@@ -106,9 +106,9 @@ class _MainDefaultState extends State<MainDefault> {
                           // maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              ),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -117,9 +117,9 @@ class _MainDefaultState extends State<MainDefault> {
                       Text(
                         '${Boards.boardPined[index]['hits'].toString()} hits',
                         style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            ),
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -128,14 +128,18 @@ class _MainDefaultState extends State<MainDefault> {
                     children: [
                       Text(
                         Boards.boardPined[index]['postDate'].toString(),
-                        style: TextStyle(fontSize: 10,),
+                        style: TextStyle(
+                          fontSize: 10,
+                        ),
                       ),
                       SizedBox(
                         width: 55,
                       ),
                       Text(
                         Boards.boardPined[index]['nickname'],
-                        style: TextStyle(fontSize: 10,),
+                        style: TextStyle(
+                          fontSize: 10,
+                        ),
                       ),
                     ],
                   ),
@@ -147,7 +151,8 @@ class _MainDefaultState extends State<MainDefault> {
                 ),
                 onPressed: () {
                   print(Boards.boardPined[index]['noticeId']);
-                  server.getReqToQuery(context, 'getBoardDetail',boardNum: index,isPined: true);
+                  server.getReqToQuery(context, 'getBoardDetail',
+                      boardNum: index, isPined: true);
                 },
                 style: ColorRev.buttonStyle3,
               ),
@@ -239,122 +244,157 @@ class _MainDefaultState extends State<MainDefault> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ColorRev.g3,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Container(
-          //   padding: EdgeInsets.symmetric(horizontal: 36, vertical: 0),
-          //   child: Text(
-          //     '공 지 사 항',
-          //     style: TextStyle(
-          //         fontSize: 24,
-          //         color: Colors.white,
-          //         fontWeight: FontWeight.bold),
-          //   ),
-          // ),
-          // TextButton(onPressed: () {server.getReq('getPinedBoard');}, child: Text('hi')),
-          Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-            elevation: 7,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Container(
+            //   padding: EdgeInsets.symmetric(horizontal: 36, vertical: 0),
+            //   child: Text(
+            //     '공 지 사 항',
+            //     style: TextStyle(
+            //         fontSize: 24,
+            //         color: Colors.white,
+            //         fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            // TextButton(onPressed: () {server.getReq('getPinedBoard');}, child: Text('hi')),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32)),
+              elevation: 7,
+              child: TextButton(
+                onPressed: () {
+                  server.getReqToQuery(context, 'getAskList',page: 0);
+                },
+                child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(
-                        '공 지 사 항',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    TextButton(
-                      child: Text('자세히 보기'),
-                      style: ColorRev.buttonStyle3,
-                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => DefaultNotice() ));},
+                    Text(
+                      '질문게시판 가기',
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
-                Divider(color: Colors.grey,thickness: 1,),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.331,
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: ListView.separated(
-                    itemCount: Boards.boardPined.length,
-                    itemBuilder: (context, index) {
-                      int itemCount = Boards.boardPined.length;
-                      if (itemCount > 0) return _buildPinedBoard(index);
-                      return Center(
+              ),
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32)),
+              elevation: 7,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                          '기록이 없습니다.',
+                          '공 지 사 항',
                           style: TextStyle(
                               fontSize: 24,
-                              color: Colors.grey,
+                              color: Colors.black,
                               fontWeight: FontWeight.bold),
                         ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return Divider(color: Colors.grey,thickness: 1,);
-                    },
+                      ),
+                      TextButton(
+                        child: Text('자세히 보기'),
+                        style: ColorRev.buttonStyle3,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DefaultNotice()));
+                        },
+                      ),
+                    ],
                   ),
-                ),
-                // Container(
-                //   height: MediaQuery.of(context).size.height*0.4,
-                //   child: ListView.builder(
-                //     controller: _scrollController,
-                //     itemCount: Boards.boardPage.length+1,
-                //     itemBuilder: (context, index) {
-                //       int itemCount = Boards.boardPage.length;
-                //       if(index==Boards.boardPage.length) return _buildProgressIndicator();
-                //       if (itemCount > 0) return _buildBoardPage(index);
-                //       return Center(
-                //         child: Text(
-                //           '기록이 없습니다.',
-                //           style: TextStyle(
-                //               fontSize: 24,
-                //               color: Colors.grey,
-                //               fontWeight: FontWeight.bold),
-                //         ),
-                //       );
-                //     },
-                //   ),
-                // ),
-                // Container(
-                //   height: MediaQuery.of(context).size.height*0.79,
-                //   padding: EdgeInsets.symmetric(vertical: 10),
-                //   child: ListView.builder(
-                //     controller: _scrollController,
-                //     itemCount: Boards.boardPage.length+Boards.boardPined.length+1,
-                //     itemBuilder: (context, index) {
-                //       int itemCount = Boards.boardPage.length+Boards.boardPined.length;
-                //       if(index==Boards.boardPage.length+Boards.boardPined.length) return _buildProgressIndicator();
-                //       if (itemCount > 0) return _buildContent(index);
-                //       return Center(
-                //         child: Text(
-                //           '기록이 없습니다.',
-                //           style: TextStyle(
-                //               fontSize: 24,
-                //               color: Colors.grey,
-                //               fontWeight: FontWeight.bold),
-                //         ),
-                //       );
-                //     },
-                //   ),
-                // ),
-              ],
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.331,
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: ListView.separated(
+                      itemCount: Boards.boardPined.length,
+                      itemBuilder: (context, index) {
+                        int itemCount = Boards.boardPined.length;
+                        if (itemCount > 0) return _buildPinedBoard(index);
+                        return Center(
+                          child: Text(
+                            '기록이 없습니다.',
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.grey,
+                          thickness: 1,
+                        );
+                      },
+                    ),
+                  ),
+                  // Container(
+                  //   height: MediaQuery.of(context).size.height*0.4,
+                  //   child: ListView.builder(
+                  //     controller: _scrollController,
+                  //     itemCount: Boards.boardPage.length+1,
+                  //     itemBuilder: (context, index) {
+                  //       int itemCount = Boards.boardPage.length;
+                  //       if(index==Boards.boardPage.length) return _buildProgressIndicator();
+                  //       if (itemCount > 0) return _buildBoardPage(index);
+                  //       return Center(
+                  //         child: Text(
+                  //           '기록이 없습니다.',
+                  //           style: TextStyle(
+                  //               fontSize: 24,
+                  //               color: Colors.grey,
+                  //               fontWeight: FontWeight.bold),
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  // Container(
+                  //   height: MediaQuery.of(context).size.height*0.79,
+                  //   padding: EdgeInsets.symmetric(vertical: 10),
+                  //   child: ListView.builder(
+                  //     controller: _scrollController,
+                  //     itemCount: Boards.boardPage.length+Boards.boardPined.length+1,
+                  //     itemBuilder: (context, index) {
+                  //       int itemCount = Boards.boardPage.length+Boards.boardPined.length;
+                  //       if(index==Boards.boardPage.length+Boards.boardPined.length) return _buildProgressIndicator();
+                  //       if (itemCount > 0) return _buildContent(index);
+                  //       return Center(
+                  //         child: Text(
+                  //           '기록이 없습니다.',
+                  //           style: TextStyle(
+                  //               fontSize: 24,
+                  //               color: Colors.grey,
+                  //               fontWeight: FontWeight.bold),
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 16,
-          )
-        ],
+            SizedBox(
+              height: 16,
+            )
+          ],
+        ),
       ),
     );
   }

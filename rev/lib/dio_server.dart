@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rev/pages/auth/auth_login.dart';
+import 'package:rev/pages/main/main_ask/ask_list.dart';
 import 'package:rev/pages/main/main_default/default_notice_detail.dart';
 import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/pages/main/main_test/test_question.dart';
 import 'package:rev/pages/main/main_test/test_showresult.dart';
 import 'package:rev/pages/main/main_test/test_showresult_detail.dart';
+import 'package:rev/repository/default_ask.dart';
 import 'package:rev/repository/default_board.dart';
 import 'package:rev/repository/test_questions.dart';
 import 'package:rev/repository/test_results.dart';
@@ -271,6 +273,9 @@ class Server {
         addr='board/notice-content';
         queryParameters={'id':isPined ? Boards.boardPined[boardNum]['noticeId']:Boards.boardPage[boardNum]['noticeId']};
         break;
+      case 'getAskList':
+        addr='board/ask';
+        queryParameters={'page': page};
     }
 
     response =
@@ -306,6 +311,21 @@ class Server {
 
         Navigator.push(context,MaterialPageRoute(builder: (context)=>DefaultNoticeDetail(boardNum,isPined)));
         break;
+      case 'getAskList':
+        if(page==0) {
+          if(Ask.askList.length==0) {
+            Ask.initAskList(response.data['asks']['content']);
+            print('initAskList complete!');
+          }
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DefaultAsk()));
+        }
+        else {
+          return response.data['asks']['content'];
+        }
+
+
+
+
     }
   }
 }
