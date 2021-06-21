@@ -242,6 +242,7 @@ class Server {
         int answerMainId,
         int boardNum,
         bool isPined,
+        int askNum,
   }) async {
     Response response;
     var options =
@@ -276,6 +277,9 @@ class Server {
       case 'getAskList':
         addr='board/ask';
         queryParameters={'page': page};
+      case 'getAskComment':
+        addr='board/comment';
+        queryParameters={'askId':Ask.askList[askNum]['askId'],'page':page};
     }
 
     response =
@@ -322,10 +326,17 @@ class Server {
         else {
           return response.data['asks']['content'];
         }
-
-
-
-
+      case 'getAskComment':
+        if(page==0) {
+          if(Ask.askComment.length==0) {
+            Ask.initAskList(response.data['asks']['content']);
+            print('initAskList complete!');
+          }
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DefaultAsk()));
+        }
+        else {
+          return response.data['asks']['content'];
+        }
     }
   }
 }

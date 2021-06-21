@@ -125,7 +125,7 @@ class _DefaultAskState extends State<DefaultAsk> {
               ),
               TextButton(
                 child: Icon(Icons.arrow_forward_ios),
-                onPressed: () {server.getReqToQuery(context, 'getBoardDetail',boardNum: index,isPined: false);},
+                onPressed: () {server.getReqToQuery(context, 'getAskComment',askNum: index,page: 0);},
                 style: ColorRev.buttonStyle3,
               ),
             ],
