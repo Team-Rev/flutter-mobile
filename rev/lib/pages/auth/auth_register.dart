@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rev/dio_server.dart';
 import 'package:rev/provider/provider_auth.dart';
 
+import '../../main.dart';
 import '../../util/color_rev.dart';
 import '../../util/reusable.dart';
 
@@ -150,7 +151,8 @@ class AuthRegister extends StatelessWidget {
                       ),
                       Container(
                         child: ReUsable.buildTextButton2('Back to Main', () {
-                          _authProvider.updateStatePage('AuthLogin');
+                          // _authProvider.updateStatePage('AuthLogin');
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
                         }),
                         width: MediaQuery.of(context).size.width * 0.3,
                       ),

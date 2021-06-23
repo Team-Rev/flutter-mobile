@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rev/pages/main/main_default/default_notice.dart';
 import 'package:rev/pages/main/main_default/main_default.dart';
+import 'package:rev/pages/main/main_page.dart';
 import 'package:rev/repository/default_board.dart';
 import 'package:rev/util/color_rev.dart';
 
@@ -121,7 +122,7 @@ class DefaultNoticeDetail extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       // Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => MainDefault()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MainWidget()));
                     },
                     child: Text('목록'),
                     style: ColorRev.buttonStyle4,

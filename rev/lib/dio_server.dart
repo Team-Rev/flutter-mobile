@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rev/main.dart';
 import 'package:rev/pages/auth/auth_login.dart';
 import 'package:rev/pages/main/main_ask/ask_list.dart';
 import 'package:rev/pages/main/main_default/default_notice_detail.dart';
@@ -20,22 +21,22 @@ import 'package:rev/util/reusable.dart';
 
 class Server {
   //Future란? 정리해서 올리기
-  Future<dynamic> getReq(String type,{page}) async {
+  Future<dynamic> getReq(String type, {page}) async {
     //Response : Dio에서 가져와서 사용. Data 반환
     Response response;
     // var options =
     //     BaseOptions(headers: {'Authorization': 'Bearer ${Secret.token}'});
     Dio dio = Dio();
     String addr;
-    switch(type) {
+    switch (type) {
       case 'getPinedBoard':
-        addr='board/notice-pined';
+        addr = 'board/notice-pined';
         break;
       case 'getNextBoard':
-        addr='board/notice?page=$page';
+        addr = 'board/notice?page=$page';
         break;
       case 'getPinedBoardAndPage':
-        addr='board/notice-first?page=0';
+        addr = 'board/notice-first?page=0';
         break;
     }
     //DogetRequest
@@ -43,7 +44,7 @@ class Server {
       "${Secret.path}$addr",
     );
 
-    switch(type) {
+    switch (type) {
       case 'getPinedBoard':
         Boards.initBoardsPined(response.data);
         break;
@@ -80,14 +81,17 @@ class Server {
         // getReq('getPinedBoard');
         // getReq('getNextBoard',page: 0);
         getReq('getPinedBoardAndPage');
-        Future.delayed(Duration(seconds: 2,),() {
+        Future.delayed(
+            Duration(
+              seconds: 2,
+            ), () {
           return postReq(context, type, data, addr);
           // getReq('getNextBoard',page: 0);
-        } );
+        });
         break;
 
       case 'signup':
-        addr = 'signup';
+        addr = 'auth/signup';
         data = {
           "userId": userId,
           "password": password,
@@ -150,7 +154,7 @@ class Server {
         break;
       case 'signup':
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AuthLogin()));
+            context, MaterialPageRoute(builder: (context) => MyApp()));
         //TODO Success, Fail 판별해서 팝업 띄우기 추가
         break;
       case 'submit':
@@ -238,11 +242,11 @@ class Server {
     String type, {
     int start,
     int end,
-        int page,
-        int answerMainId,
-        int boardNum,
-        bool isPined,
-        int askNum,
+    int page,
+    int answerMainId,
+    int boardNum,
+    bool isPined,
+    int askNum,
   }) async {
     Response response;
     var options =
@@ -271,15 +275,20 @@ class Server {
         queryParameters = {'id': answerMainId};
         break;
       case 'getBoardDetail':
-        addr='board/notice-content';
-        queryParameters={'id':isPined ? Boards.boardPined[boardNum]['noticeId']:Boards.boardPage[boardNum]['noticeId']};
+        addr = 'board/notice-content';
+        queryParameters = {
+          'id': isPined
+              ? Boards.boardPined[boardNum]['noticeId']
+              : Boards.boardPage[boardNum]['noticeId']
+        };
         break;
       case 'getAskList':
-        addr='board/ask';
-        queryParameters={'page': page};
+        addr = 'board/ask';
+        queryParameters = {'page': page};
+        break;
       case 'getAskComment':
-        addr='board/comment';
-        queryParameters={'askId':Ask.askList[askNum]['askId'],'page':page};
+        addr = 'board/comment';
+        queryParameters = {'askId': Ask.askList[askNum]['askId'], 'page': page};
     }
 
     response =
@@ -308,33 +317,38 @@ class Server {
             context, MaterialPageRoute(builder: (context) => ResultDetail()));
         break;
       case 'getBoardDetail':
-        if(isPined)
-              Boards.boardPined[boardNum].putIfAbsent('detail',() =>response.data);
+        if (isPined)
+          Boards.boardPined[boardNum]
+              .putIfAbsent('detail', () => response.data);
         else
-              Boards.boardPage[boardNum].putIfAbsent('detail',() =>response.data);
+          Boards.boardPage[boardNum].putIfAbsent('detail', () => response.data);
 
-        Navigator.push(context,MaterialPageRoute(builder: (context)=>DefaultNoticeDetail(boardNum,isPined)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DefaultNoticeDetail(boardNum, isPined)));
         break;
       case 'getAskList':
-        if(page==0) {
-          if(Ask.askList.length==0) {
+        if (page == 0) {
+          if (Ask.askList.length == 0) {
             Ask.initAskList(response.data['asks']['content']);
             print('initAskList complete!');
           }
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DefaultAsk()));
-        }
-        else {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => DefaultAsk()));
+        } else {
           return response.data['asks']['content'];
         }
+        break;
       case 'getAskComment':
-        if(page==0) {
-          if(Ask.askComment.length==0) {
+        if (page == 0) {
+          if (Ask.askComment.length == 0) {
             Ask.initAskList(response.data['asks']['content']);
             print('initAskList complete!');
           }
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DefaultAsk()));
-        }
-        else {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => DefaultAsk()));
+        } else {
           return response.data['asks']['content'];
         }
     }
