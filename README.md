@@ -8,3 +8,6 @@
 * Provider : 전역 데이터 관리를 위한 라이브러리. 주로 객체 간 정보 통신에 사용.
 * DIO : RESTful한 데이터 통신을 위한 라이브러리. MSA 서버로 데이터 요청 / 응답 데이터 처리 에 사용
 * JWT : Access Token과 Refresh Token을 발급하여 사용자 인증에 사용.
+
+### 현재 진행상태
+<https://github.com/adszzz11/flutter-renew.git> 개인 Repo로 이동하여 전체 프로그램 리팩토링 진행중.
